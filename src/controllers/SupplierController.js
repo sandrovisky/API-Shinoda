@@ -9,7 +9,7 @@ module.exports = {
 
     async delete(req, res){
         const { id } = req.body
-        const cliente =  await Cliente.destroy({where:{id: id}, force: true}).then(deletedOwner => {
+        const suplier =  await Cliente.destroy({where:{id: id}, force: true}).then(deletedOwner => {
             res.json(deletedOwner);
           }).catch(deletedOwner => {
             console.log(deletedOwner);
@@ -18,10 +18,10 @@ module.exports = {
     },
 
     async store(req, res){
-        const { nomeFantasia, razaoSocial, endereco} = req.body
+        const { nomeFantasia, razaoSocial, endereco, cnpj} = req.body
 
-        const supplierr = await Supplier.create({  nomeFantasia, razaoSocial, endereco })
+        const supplier = await Supplier.create({  nomeFantasia, razaoSocial, endereco, cnpj })
         console.log(res)
-        return res.json(supplierr)
+        return res.json(supplier)
     }
 }

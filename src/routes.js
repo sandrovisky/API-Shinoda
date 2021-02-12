@@ -1,9 +1,9 @@
 const express = require('express')
-const ClienteController = require('./controllers/ProviderController')
+const SupplierController = require('./controllers/SupplierController')
 const routes = express.Router()
 
-routes.get('/suppliers', ClienteController.index)
-routes.post('/suppliers', ClienteController.store)
-routes.delete('/cadastro/:id', ClienteController.delete)
+routes.get('/suppliers', SupplierController.index)
+routes.post('/suppliers', SupplierController.store)
+routes.delete('/cadastro/:id', SupplierController.delete)
 
 module.exports = routes;

@@ -13,6 +13,7 @@ module.exports = {
         nomeFantasia: Sequelize.STRING,
         razaoSocial: Sequelize.STRING,
         endereco: Sequelize.STRING,
+        cnpj: Sequelize.STRING,
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE
     })

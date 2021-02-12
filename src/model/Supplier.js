@@ -6,6 +6,7 @@ class Supplier extends Model {
             nomeFantasia: DataTypes.STRING,
             razaoSocial: DataTypes.STRING,
             endereco: DataTypes.STRING,
+            cnpj: DataTypes.STRING,
         }, {
             sequelize
         })
