@@ -1,3 +1,4 @@
+const { update } = require('../model/Supplier')
 const Supplier = require ('../model/Supplier')
 
 module.exports = {
@@ -7,18 +8,36 @@ module.exports = {
         return res.json(supplier)
     },
 
-    async delete(req, res){
-        const { id } = req.body
-        const suplier =  await Cliente.destroy({where:{id: id}, force: true}).then(deletedOwner => {
+    async update(req, res){
+
+        const {id, nomeFantasia, razaoSocial, endereco, cnpj} = req.body        
+
+        const response = await Supplier.update({nomeFantasia, razaoSocial, endereco, cnpj },{where: {id}, force: true}) 
+        .then(deletedOwner => {
             res.json(deletedOwner);
-          }).catch(deletedOwner => {
+            console.log(deletedOwner)
+        })
+        .catch(deletedOwner => {
             console.log(deletedOwner);
-          });
-        
+        });
+        console.log(response)
+    },
+
+    async delete(req, res){
+        const {id} = req.body
+        const suplier =  await Supplier.destroy({where:{id}, force: true})
+            .then(deletedOwner => {
+                res.json(deletedOwner);
+                console.log(deletedOwner)
+            })
+            .catch(deletedOwner => {
+                console.log(deletedOwner);
+            });
+        console.log(suplier)
     },
 
     async store(req, res){
-        const { nomeFantasia, razaoSocial, endereco, cnpj} = req.body
+        const { nomeFantasia, razaoSocial, endereco, cnpj } = req.body
 
         const supplier = await Supplier.create({  nomeFantasia, razaoSocial, endereco, cnpj })
         console.log(res)
