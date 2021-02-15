@@ -1,18 +1,18 @@
 
-const Supplier = require ('../model/Supplier')
+const Equipment = require ('../model/Equipment')
 
 module.exports = {
 
     async index(req, res){
-        const supplier =  await Supplier.findAll()
-        return res.json(supplier)
+        const equipment =  await Equipment.findAll()
+        return res.json(equipment)
     },
 
     async update(req, res){
 
-        const {id, nomeFantasia, razaoSocial, endereco, cnpj} = req.body        
+        const {id, nome, tipo, tag, capacidade} = req.body        
 
-        const response = await Supplier.update({ nomeFantasia, razaoSocial, endereco, cnpj },{where: {id}, force: true}) 
+        const response = await Equipment.update({ nome, tipo, tag, capacidade },{where: {id}, force: true}) 
         .then(() => {
             res.json({message: "atualizado com sucesso"});
             console.log({message: "atualizado com sucesso"})
@@ -26,7 +26,7 @@ module.exports = {
 
     async delete(req, res){
         const {id} = req.body
-        await Supplier.destroy({where:{id}, force: true})
+        await Equipment.destroy({where:{id}, force: true})
         .then(() => {
             res.json({message: "deletado com sucesso"});
             console.log({message: "deletado com sucesso"})
@@ -38,10 +38,10 @@ module.exports = {
     },
 
     async store(req, res){
-        const { nomeFantasia, razaoSocial, endereco, cnpj } = req.body
+        const { nome, tipo, tag, capacidade } = req.body
 
-        const supplier = await Supplier.create({  nomeFantasia, razaoSocial, endereco, cnpj })
+        const equipment = await Equipment.create({  nome, tipo, tag, capacidade })
         console.log(res)
-        return res.json(supplier)
+        return res.json(equipment)
     }
 }

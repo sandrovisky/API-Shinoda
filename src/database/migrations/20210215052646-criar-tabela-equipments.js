@@ -3,16 +3,16 @@
 module.exports = {
     up: async (queryInterface, Sequelize) => {
     
-        return queryInterface.createTable('Suppliers', {
+        return queryInterface.createTable('Equipment', {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            nomeFantasia: Sequelize.STRING,
-            razaoSocial: Sequelize.STRING,
-            endereco: Sequelize.STRING,
-            cnpj: Sequelize.STRING,
+            nome: Sequelize.STRING,
+            tipo: Sequelize.STRING,
+            tag: Sequelize.STRING,
+            capacidade: Sequelize.STRING,
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE
         })
@@ -20,6 +20,6 @@ module.exports = {
     },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Suppliers')
+    return queryInterface.dropTable('Equipment')
   }
 };

@@ -1,18 +1,26 @@
-
-const Supplier = require ('../model/Supplier')
+const User = require('../model/User')
 
 module.exports = {
 
     async index(req, res){
-        const supplier =  await Supplier.findAll()
-        return res.json(supplier)
+        const user =  await User.findAll()
+        return res.json(user)
+    },
+
+    async encontraUsuario(req, res){
+        const {usuario} = req.params
+        console.log(usuario)
+        const user =  await User.findOne({ where: { usuario } });
+        console.log(user)
+        return res.json(user)
+
     },
 
     async update(req, res){
 
-        const {id, nomeFantasia, razaoSocial, endereco, cnpj} = req.body        
+        const {id, usuario, senha} = req.body        
 
-        const response = await Supplier.update({ nomeFantasia, razaoSocial, endereco, cnpj },{where: {id}, force: true}) 
+        const response = await User.update({id, usuario, senha },{where: {id}, force: true})
         .then(() => {
             res.json({message: "atualizado com sucesso"});
             console.log({message: "atualizado com sucesso"})
@@ -26,7 +34,7 @@ module.exports = {
 
     async delete(req, res){
         const {id} = req.body
-        await Supplier.destroy({where:{id}, force: true})
+        await User.destroy({where:{id}, force: true})
         .then(() => {
             res.json({message: "deletado com sucesso"});
             console.log({message: "deletado com sucesso"})
@@ -38,10 +46,10 @@ module.exports = {
     },
 
     async store(req, res){
-        const { nomeFantasia, razaoSocial, endereco, cnpj } = req.body
+        const { usuario, senha } = req.body
 
-        const supplier = await Supplier.create({  nomeFantasia, razaoSocial, endereco, cnpj })
+        const user = await User.create({ usuario, senha })
         console.log(res)
-        return res.json(supplier)
+        return res.json(user)
     }
 }
