@@ -21,7 +21,6 @@ routes.get('/products', ProductController.index)
 routes.post('/products', ProductController.store)
 routes.delete('/products/:id', ProductController.delete)
 routes.put('/products/:id', ProductController.update)
-routes.put('/products/:id/suppliers', ProductController.putIdSupplier)
 
 //rotas de usuarios
 routes.get('/users', UserController.index)
