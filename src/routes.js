@@ -20,7 +20,6 @@ routes.put('/products/:id', ProductController.update)
 routes.get('/users', UserController.index)
 routes.get('/users/:', UserController.encontraUsuario)
 routes.post('/users', UserController.store)
-routes.delete('/users/:id', UserController.delete)
 routes.put('/users/:id', UserController.update)
 
 routes.get('/equipment', EquipmentController.index)

@@ -41,7 +41,7 @@ module.exports = {
         const { nome, tipo, tag, capacidade } = req.body
 
         const equipment = await Equipment.create({  nome, tipo, tag, capacidade })
-        console.log(res)
+        console.log(equipment)
         return res.json(equipment)
     }
 }

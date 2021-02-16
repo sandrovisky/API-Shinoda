@@ -8,7 +8,10 @@ module.exports = {
                 primaryKey: true,
                 autoIncrement: true,
             },        
-            usuario: Sequelize.STRING,
+            usuario: {
+                type: Sequelize.STRING,
+                unique: true,
+            },
             senha: Sequelize.STRING,
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE

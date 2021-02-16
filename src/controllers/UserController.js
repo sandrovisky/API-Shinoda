@@ -8,7 +8,7 @@ module.exports = {
     },
 
     async encontraUsuario(req, res){
-        const {usuario} = req.params
+        const {usuario} = req.query
         console.log(usuario)
         const user =  await User.findOne({ where: { usuario } });
         console.log(user)
@@ -18,9 +18,9 @@ module.exports = {
 
     async update(req, res){
 
-        const {id, usuario, senha} = req.body        
+        const { id, senha } = req.body        
 
-        const response = await User.update({id, usuario, senha },{where: {id}, force: true})
+        const response = await User.update({ senha },{where: {id}, force: true})
         .then(() => {
             res.json({message: "atualizado com sucesso"});
             console.log({message: "atualizado com sucesso"})
@@ -32,24 +32,30 @@ module.exports = {
         console.log(response)
     },
 
-    async delete(req, res){
-        const {id} = req.body
-        await User.destroy({where:{id}, force: true})
-        .then(() => {
-            res.json({message: "deletado com sucesso"});
-            console.log({message: "deletado com sucesso"})
-        })
-        .catch(() => {
-            res.json({message: "falha ao deletar"});
-            console.log({message: "falha ao deletar"});
-        });
-    },
-
     async store(req, res){
         const { usuario, senha } = req.body
 
-        const user = await User.create({ usuario, senha })
-        console.log(res)
-        return res.json(user)
+        const verificaCadastro =  await User.findOne({ where: { usuario } });
+        if (verificaCadastro === null) {
+
+            const user = await User.create({ usuario, senha })
+
+            .then(() => {
+                res.json({message: "usuario criado com sucesso"});
+                console.log({message: "usuario criado com sucesso"})
+            })
+            .catch(() => {
+                res.json({message: "falha ao criar"});
+                console.log({message: "falha ao criar"});
+            });
+            console.log(user)
+            return res.json(user)
+        } else {
+            console.log({message: "usuario ja cadastrado"});
+            return res.json({message: "usuario ja cadastrado"})
+        }
+        
     }
 }
+
+
