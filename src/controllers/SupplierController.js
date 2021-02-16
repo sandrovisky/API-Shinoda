@@ -3,11 +3,13 @@ const Supplier = require ('../model/Supplier')
 
 module.exports = {
 
+    //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
         const supplier =  await Supplier.findAll()
         return res.json(supplier)
     },
 
+    //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
 
         const {id, nomeFantasia, razaoSocial, endereco, cnpj} = req.body        
@@ -24,6 +26,7 @@ module.exports = {
         console.log(response)
     },
 
+    //Função que vai receber 'id' de um cadastro e exclusão do mesmo
     async delete(req, res){
         const {id} = req.body
         await Supplier.destroy({where:{id}, force: true})
@@ -37,11 +40,12 @@ module.exports = {
         });
     },
 
+    //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
         const { nomeFantasia, razaoSocial, endereco, cnpj } = req.body
 
         const supplier = await Supplier.create({  nomeFantasia, razaoSocial, endereco, cnpj })
         console.log(res)
         return res.json(supplier)
-    }
+    },
 }

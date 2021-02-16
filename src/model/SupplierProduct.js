@@ -7,6 +7,10 @@ class SupplierProduct extends Model {
             sequelize
         })
     }
+    static associate(models) {
+        this.belongsTo(models.Product, { foreignKey: 'idProduct', as: 'product' })
+        this.belongsTo(models.Supplier, { foreignKey: 'idSupplier', as: 'supplier' })
+    }
 } 
 
 module.exports = SupplierProduct
