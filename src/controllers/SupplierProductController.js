@@ -1,13 +1,12 @@
 
 const SupplierProduct = require ('../model/SupplierProduct')
-const Supplier = require ('../model/Supplier')
 const Product = require('../model/Product')
 
 module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
-    async index(req, res){
-        const result =  await SupplierProduct.findAll()
+    async indexProducts(req, res){
+        const result =  await SupplierProduct.findAll({include: {association: 'product'}})
         return res.json(result)
     },
 
