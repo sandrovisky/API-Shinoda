@@ -8,6 +8,7 @@ const EquipmentController = require('./controllers/EquipmentController')
 const SupplierProductController = require('./controllers/SupplierProductController')
 const MoveController = require('./controllers/MoveController')
 const MoveItensController = require('./controllers/MoveItensController')
+const LoteVolumeController = require('./controllers/LoteVolumeController')
 
 
 const routes = express.Router()
@@ -40,6 +41,12 @@ routes.put('/equipment/:id', EquipmentController.update)
 routes.get('/suppliers-products/products', SupplierProductController.indexProducts)
 routes.post('/suppliers-products', SupplierProductController.store)
 routes.delete('/suppliers-products', SupplierProductController.delete)
+
+//rotas de LoteVolumes
+routes.get('/lote-volumes', LoteVolumeController.index)
+routes.post('/lote-volumes', LoteVolumeController.store)
+routes.delete('/lote-volumes/:id', LoteVolumeController.delete)
+routes.put('/lote-volumes/:id', LoteVolumeController.update)
 
 //rotas de moves
 routes.get('/moves', MoveController.index)

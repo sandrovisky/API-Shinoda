@@ -1,6 +1,7 @@
 
 const SupplierProduct = require ('../model/SupplierProduct')
 const Product = require('../model/Product')
+const Supplier = require('../model/Supplier')
 
 module.exports = {
 
