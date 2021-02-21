@@ -5,7 +5,7 @@ module.exports = {
     dialect: "mssql",
     database: 'Shinoda',
     define: {
-        timestamps: true,
+        timestamps: true
     },
     options: {
         instanceName: 'MSSQLSERVER',

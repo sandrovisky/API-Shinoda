@@ -9,6 +9,9 @@ const SupplierProductController = require('./controllers/SupplierProductControll
 const MoveController = require('./controllers/MoveController')
 const MoveItensController = require('./controllers/MoveItensController')
 const LoteVolumeController = require('./controllers/LoteVolumeController')
+const LoteController = require('./controllers/LoteController')
+const MoveItensVolumeController = require('./controllers/MoveItensVolumeController')
+const AnalysisController = require('./controllers/AnalysisController')
 
 
 const routes = express.Router()
@@ -54,11 +57,29 @@ routes.post('/moves', MoveController.store)
 routes.delete('/moves/:id', MoveController.delete)
 routes.put('/moves/:id', MoveController.update)
 
-//rotas de equipamentos
+//rotas de move itens
 routes.get('/move-itens', MoveItensController.index)
 routes.get('/move-itens/:idMove', MoveItensController.indexOne)
 routes.post('/move-itens', MoveItensController.store)
 routes.delete('/move-itens/:id', MoveItensController.delete)
 routes.put('/move-itens/:id', MoveItensController.update)
+
+//rotas de lotes
+routes.get('/lotes', LoteController.index)
+routes.post('/lotes', LoteController.store)
+routes.delete('/lotes/:id', LoteController.delete)
+routes.put('/lotes/:id', LoteController.update)
+
+//rotas de MoveItensVolume
+routes.get('/move-itens-volumes', MoveItensVolumeController.index)
+routes.post('/move-itens-volumes', MoveItensVolumeController.store)
+routes.delete('/move-itens-volumes/:id', MoveItensVolumeController.delete)
+routes.put('/move-itens-volumes/:id', MoveItensVolumeController.update)
+
+//rotas de analysis
+routes.get('/analysis', AnalysisController.index)
+routes.post('/analysis', AnalysisController.store)
+routes.delete('/analysis/:id', AnalysisController.delete)
+routes.put('/analysis/:id', AnalysisController.update)
 
 module.exports = routes;

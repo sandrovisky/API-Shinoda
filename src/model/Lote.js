@@ -1,16 +1,10 @@
 const { Model, DataTypes } = require('sequelize')
 
-class LoteVolume extends Model {
+class Lote extends Model {
     static init (sequelize) {
         super.init({
-        volume: DataTypes.STRING,
-        quantidade: DataTypes.STRING,
+        codigo: DataTypes.STRING,
         dataValidade: DataTypes.STRING,
-        emissao: DataTypes.STRING,
-        responsavel3: DataTypes.INTEGER,
-        responsavel2: DataTypes.INTEGER,
-        responsavel1: DataTypes.INTEGER,
-        numRevisao: DataTypes.STRING,
         numLaudo: DataTypes.STRING,
         createdBy: DataTypes.INTEGER,
         updatedBy: DataTypes.INTEGER,
@@ -24,5 +18,5 @@ class LoteVolume extends Model {
     }
 } 
 
-module.exports = LoteVolume
+module.exports = Lote
 

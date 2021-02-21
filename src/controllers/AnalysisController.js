@@ -1,19 +1,18 @@
-const Move = require ('../model/Move')
-const Supplier = require('../model/Supplier')
+const Analysis = require ('../model/Analysis')
 
 module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
-        const result =  await Move.findAll({ include: [{ all: true }] })
+        const result =  await Analysis.findAll()
         return res.json(result)
     },
 
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
-        const { nf, pedido, status, createdBy, updatedBy, id } = req.body        
+        const { status, idProduct, idLote, id } = req.body        
 
-        await Move.update( { nf, pedido, status, createdBy, updatedBy } ,{ where: { id }, force: true }) 
+        await Analysis.update({ status, idProduct, idLote }, { where: { id }, force: true}) 
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})
@@ -26,8 +25,8 @@ module.exports = {
 
     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
     async delete(req, res){
-        const { id } = req.body
-        await Move.destroy({where:{id}, force: true})
+        const {id} = req.body
+        const result = await Analysis.destroy({ where: { id }, force: true})
         .then(() => {
             res.status(200).json({message: "Cadastro deletado com sucesso"});
             console.log({message: "Cadastro deletado com sucesso"})
@@ -40,18 +39,10 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { nf, pedido, status, createdBy, updatedBy, idSupplier } = req.body 
+        const { status, idProduct, idLote } = req.body 
 
-        const supplier =  await Supplier.findByPk(idSupplier)
-
-        if(supplier !== null){
-            const result = await Move.create({ nf, pedido, status, createdBy, updatedBy, idSupplier })
+        const result = await Analysis.create({  status, idProduct, idLote})
         
-            return res.json(result)
-        } else {
-            return  res.status(500).json("erro")
-        }
-        
-        
+        return res.json(result)
     }
 }
