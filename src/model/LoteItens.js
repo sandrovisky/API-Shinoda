@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 
-class Lote extends Model {
+class LoteItens extends Model {
     static init (sequelize) {
         super.init({
         codigo: DataTypes.STRING,
@@ -14,9 +14,10 @@ class Lote extends Model {
     }
     static associate(models) {
         this.belongsTo(models.MoveItens, { foreignKey: 'idMoveitens', as: 'moveitens' })
-        this.belongsTo(models.Analysis, { foreignKey: 'idAnalysis', as: 'analysis' })
+        this.hasOne(models.Analysis, { foreignKey: 'idLoteitens', as: 'analysis' })
+        this.hasOne(models.MoveItensVolume, { foreignKey: 'idLoteitens', as: 'moveitensvolume' })
     }
 } 
 
-module.exports = Lote
+module.exports = LoteItens
 

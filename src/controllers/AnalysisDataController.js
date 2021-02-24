@@ -1,30 +1,19 @@
-const Move = require ('../model/Move')
-const MoveItensVolume = require('../model/MoveItensVolume')
-const Supplier = require('../model/Supplier')
+const AnalysisData = require ('../model/AnalysisData')
+const Product = require ('../model/Product')
 
 module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
-        const result =  await Move.findAll({ include: 
-            {
-                association: 'moveitens',
-                include: [
-                    {
-                        model: MoveItensVolume,
-                        as: 'moveitensvolume'
-                    }
-                ]
-            },
-        })
+        const result =  await AnalysisData.findAll()
         return res.json(result)
     },
 
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
-        const { nf, pedido, status, createdBy, updatedBy, id } = req.body        
+        const { idAnalysis, idMoveitensvolume, idProduct, quantidadeIntegral, quantidadeGema, quantidadeClara, quantidadeCasca, id } = req.body        
 
-        await Move.update( { nf, pedido, status, createdBy, updatedBy } ,{ where: { id }, force: true }) 
+        await AnalysisData.update({ idAnalysis, idMoveitensvolume, idProduct, quantidadeIntegral, quantidadeGema, quantidadeClara, quantidadeCasca }, { where: { id }, force: true}) 
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})
@@ -37,8 +26,8 @@ module.exports = {
 
     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
     async delete(req, res){
-        const { id } = req.body
-        await Move.destroy({where:{id}, force: true})
+        const {id} = req.body
+        const result = await AnalysisData.destroy({ where: { id }, force: true})
         .then(() => {
             res.status(200).json({message: "Cadastro deletado com sucesso"});
             console.log({message: "Cadastro deletado com sucesso"})
@@ -51,18 +40,11 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { nf, pedido, status, createdBy, updatedBy, idSupplier } = req.body 
 
-        const supplier =  await Supplier.findByPk(idSupplier)
+        const { createdBy, updatedBy, idAnalysis, idMoveitensvolume, idProduct, quantidadeIntegral, quantidadeGema, quantidadeClara, quantidadeCasca } = req.body
 
-        if(supplier !== null){
-            const result = await Move.create({ nf, pedido, status, createdBy, updatedBy, idSupplier })
+        const result = await AnalysisData.create({ createdBy, updatedBy, idAnalysis, idMoveitensvolume, idProduct, quantidadeIntegral, quantidadeGema, quantidadeClara, quantidadeCasca })
         
-            return res.json(result)
-        } else {
-            return  res.status(500).json("erro")
-        }
-        
-        
+        return res.json(result)
     }
 }

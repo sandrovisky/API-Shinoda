@@ -9,9 +9,10 @@ const SupplierProductController = require('./controllers/SupplierProductControll
 const MoveController = require('./controllers/MoveController')
 const MoveItensController = require('./controllers/MoveItensController')
 const LoteVolumeController = require('./controllers/LoteVolumeController')
-const LoteController = require('./controllers/LoteController')
+const LoteItensController = require('./controllers/LoteItensController')
 const MoveItensVolumeController = require('./controllers/MoveItensVolumeController')
 const AnalysisController = require('./controllers/AnalysisController')
+const AnalysisDataController = require('./controllers/AnalysisDataController')
 
 
 const routes = express.Router()
@@ -65,13 +66,16 @@ routes.delete('/move-itens/:id', MoveItensController.delete)
 routes.put('/move-itens/:id', MoveItensController.update)
 
 //rotas de lotes
-routes.get('/lotes', LoteController.index)
-routes.post('/lotes', LoteController.store)
-routes.delete('/lotes/:id', LoteController.delete)
-routes.put('/lotes/:id', LoteController.update)
+routes.get('/lotes', LoteItensController.index)
+routes.get('/lotes/:codigo', LoteItensController.indexOne)
+routes.get('/lotes/moveitensvolume/:idMove', LoteItensController.indexMoveItensVolume)
+routes.post('/lotes', LoteItensController.store)
+routes.delete('/lotes/:id', LoteItensController.delete)
+routes.put('/lotes/:id', LoteItensController.update)
 
 //rotas de MoveItensVolume
 routes.get('/move-itens-volumes', MoveItensVolumeController.index)
+routes.get('/move-itens-volumes/:idMoveitens', MoveItensVolumeController.indexAll)
 routes.post('/move-itens-volumes', MoveItensVolumeController.store)
 routes.delete('/move-itens-volumes/:id', MoveItensVolumeController.delete)
 routes.put('/move-itens-volumes/:id', MoveItensVolumeController.update)
@@ -81,5 +85,11 @@ routes.get('/analysis', AnalysisController.index)
 routes.post('/analysis', AnalysisController.store)
 routes.delete('/analysis/:id', AnalysisController.delete)
 routes.put('/analysis/:id', AnalysisController.update)
+
+//rotas de dados das analises
+routes.get('/analysis-data', AnalysisDataController.index)
+routes.post('/analysis-data', AnalysisDataController.store)
+routes.delete('/analysis-data/:id', AnalysisDataController.delete)
+routes.put('/analysis-data/:id', AnalysisDataController.update)
 
 module.exports = routes;

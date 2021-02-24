@@ -2,12 +2,30 @@
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        return queryInterface.createTable('Analyses', {
+        return queryInterface.createTable('AnalysisData', {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },        
+            idAnalysis: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'analyses',
+                    key: 'id'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'NO ACTION'
+            },        
+            idMoveitensvolume: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'moveitensvolumes',
+                    key: 'id'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'NO ACTION'
+            },
             idProduct: {
                 type: Sequelize.INTEGER,
                 references: {
@@ -16,17 +34,11 @@ module.exports = {
                 },
                 onUpdate: 'CASCADE',
                 onDelete: 'NO ACTION'
-            },        
-            idLoteitens: {
-                type: Sequelize.INTEGER,
-                references: {
-                    model: 'loteitens',
-                    key: 'id'
-                },
-                onUpdate: 'CASCADE',
-                onDelete: 'NO ACTION'
             },
-            status: Sequelize.STRING,           
+            quantidadeIntegral: Sequelize.STRING,        
+            quantidadeGema: Sequelize.STRING,
+            quantidadeClara: Sequelize.STRING,
+            quantidadeCasca: Sequelize.STRING,   
             createdBy: Sequelize.INTEGER,
             updatedBy: Sequelize.INTEGER,
             createdAt: Sequelize.DATE,
@@ -35,6 +47,7 @@ module.exports = {
       },
     
       down: async (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('Analyses')
+        return queryInterface.dropTable('AnalysisData')
       }
 };
+

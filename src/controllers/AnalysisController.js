@@ -4,7 +4,7 @@ module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
-        const result =  await Analysis.findAll()
+        const result =  await Analysis.findAll({include: 'loteitens'})
         return res.json(result)
     },
 
@@ -39,9 +39,8 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { status, idProduct, idLote } = req.body 
 
-        const result = await Analysis.create({  status, idProduct, idLote})
+        const result = await Analysis.create(req.body)
         
         return res.json(result)
     }

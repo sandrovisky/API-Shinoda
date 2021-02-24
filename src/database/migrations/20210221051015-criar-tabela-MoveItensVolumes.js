@@ -17,10 +17,10 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'NO ACTION'
         },
-        idLote: {
+        idLoteitens: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'lotes',
+                model: 'loteitens',
                 key: 'id'
             },
             onUpdate: 'CASCADE',

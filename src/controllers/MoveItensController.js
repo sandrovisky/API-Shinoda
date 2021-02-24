@@ -1,10 +1,39 @@
 const MoveItens = require ('../model/MoveItens')
+const Product = require ('../model/Product')
+const Move = require ('../model/Move')
+const Supplier = require ('../model/Supplier')
+const { Model } = require('sequelize')
+
 
 module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
-        const result =  await MoveItens.findAll({include: {association: 'product'}})
+        const result =  await MoveItens.findAll(
+            {
+            include: [
+            {
+                model: Product, 
+                as: 'product'
+            },
+            { 
+                model: Move, 
+                as: 'move',
+                include: [
+                    {
+                        model: Supplier,
+                        as: 'supplier'
+                    }
+                ] 
+            }
+        ]})
+        return res.json(result)
+    },
+
+    async indexOne(req, res){
+
+        const {idMove} = req.params
+        const result =  await MoveItens.findAll( {where: {idMove},include: {association: 'product'}})
         return res.json(result)
     },
 
@@ -46,9 +75,9 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { createdBy, updatedBy, idMove, idProduct } = req.body 
+        const { createdBy, updatedBy, idMove, idProduct, idLoteitens } = req.body 
 
-        const result = await MoveItens.create({ createdBy, updatedBy, idMove, idProduct })
+        const result = await MoveItens.create({ createdBy, updatedBy, idMove, idProduct, idLoteitens })
         
         return res.json(result)
     }

@@ -1,17 +1,48 @@
+const { Model } = require('sequelize')
+const LoteItens = require('../model/LoteItens')
+const Move = require('../model/Move')
+const MoveItens = require('../model/MoveItens')
 const MoveItensVolume = require('../model/MoveItensVolume')
+const Product = require('../model/Product')
 
 module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
-        const result =  await MoveItensVolume.findAll({ include: [{ all: true }] })
+        const result =  await MoveItensVolume.findAll({ include:[
+            {
+                association: 'moveitens',
+                include: [
+                   { 
+                       association: 'product'
+                    }
+                ]
+            },
+            {
+                association: 'lote'
+            }
+        ]})
+        return res.json(result)
+    },
+
+    async indexAll(req, res){
+
+        const {idMoveitens} = req.params
+        
+        const result =  await MoveItensVolume.findAll({include:[
+            {
+                model: Move,
+                as: 'move'
+                
+            },
+        ]})
         return res.json(result)
     },
 
     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
     async delete(req, res){
         const { id } = req.body
-        await Move.destroy({where:{id}, force: true})
+        await MoveItensVolume.destroy({where:{id}, force: true})
         .then(() => {
             res.status(200).json({message: "Cadastro deletado com sucesso"});
             console.log({message: "Cadastro deletado com sucesso"})
@@ -40,9 +71,9 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { idMoveitens, idLote, quantidadePaletes, quantidadeTotal, createdBy, updatedBy } = req.body
+        const { idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy, updatedBy } = req.body
 
-            const result = await MoveItensVolume.create({ idMoveitens, idLote, quantidadePaletes, quantidadeTotal, createdBy, updatedBy })
+            const result = await MoveItensVolume.create({ idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy, updatedBy })
             
             return res.json(result)
         
