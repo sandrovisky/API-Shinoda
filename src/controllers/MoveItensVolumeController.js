@@ -27,14 +27,21 @@ module.exports = {
 
     async indexAll(req, res){
 
-        const {idMoveitens} = req.params
+        const {idMove} = req.params
         
         const result =  await MoveItensVolume.findAll({include:[
             {
-                model: Move,
-                as: 'move'
-                
-            },
+                model: MoveItens,
+                as: 'moveitens',
+                where: {idMove},
+                include: [
+                    {
+                        association: 'product'  
+                    },
+                ] 
+            },{
+                association: 'lote'
+            }
         ]})
         return res.json(result)
     },
@@ -42,7 +49,7 @@ module.exports = {
     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
     async delete(req, res){
         const { id } = req.body
-        await MoveItensVolume.destroy({where:{id}, force: true})
+        await MoveItensVolume.destroy({ where: { id }, force: true})
         .then(() => {
             res.status(200).json({message: "Cadastro deletado com sucesso"});
             console.log({message: "Cadastro deletado com sucesso"})

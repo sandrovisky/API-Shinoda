@@ -7,15 +7,46 @@ module.exports = {
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
         const result =  await Move.findAll({ include: 
-            {
-                association: 'moveitens',
-                include: [
-                    {
-                        model: MoveItensVolume,
-                        as: 'moveitensvolume'
-                    }
-                ]
-            },
+            [
+                {
+                    association: 'moveitens',
+                    include: [
+                        {
+                            model: MoveItensVolume,
+                            as: 'moveitensvolume'
+                        }
+                    ],
+                },
+                {
+                    association: 'moveitensvolumetable'
+                },
+                {
+                    association: 'supplier'
+                }
+            ],
+                
+        })
+        return res.json(result)
+    },
+
+    async indexOne(req, res){
+        const { id } = req.params
+        const result =  await Move.findAll({where: { id }, include: 
+            [
+                {
+                    association: 'moveitens',
+                    include: [
+                        {
+                            model: MoveItensVolume,
+                            as: 'moveitensvolume'
+                        }
+                    ],
+                },
+                {
+                    association: 'moveitensvolumetable'
+                }
+            ],
+                
         })
         return res.json(result)
     },

@@ -8,6 +8,12 @@ module.exports = {
         return res.json(result)
     },
 
+    async indexOne(req, res){
+        const { id } = req.params
+        const result =  await Product.findByPk( id )        
+        return res.json(result)
+    },
+
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
         const { id, codigo, nome, medida} = req.body        

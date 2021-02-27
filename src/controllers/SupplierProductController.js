@@ -11,6 +11,19 @@ module.exports = {
         return res.json(result)
     },
 
+    //Função que vai retornar objeto com todos os cadastros
+    async index(req, res){
+        const result =  await SupplierProduct.findAll({include: {association: 'product'}})
+        return res.json(result)
+    },
+
+    //Função que vai retornar objeto com os cadastros de acordo com a idSupplier
+    async indexOneProducts(req, res){
+        const {idProduct} = req.params
+        const result =  await SupplierProduct.findAll({ where: { idProduct }, include: {association: 'supplier'}})
+        return res.json(result)
+    },
+
     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
     async delete(req, res){
         const {id} = req.body

@@ -11,20 +11,22 @@ const MoveItensController = require('./controllers/MoveItensController')
 const LoteVolumeController = require('./controllers/LoteVolumeController')
 const LoteItensController = require('./controllers/LoteItensController')
 const MoveItensVolumeController = require('./controllers/MoveItensVolumeController')
+const MoveItensVolumeTableController = require('./controllers/MoveItensVolumeTableController')
 const AnalysisController = require('./controllers/AnalysisController')
 const AnalysisDataController = require('./controllers/AnalysisDataController')
-
 
 const routes = express.Router()
 
 //rotas de fornecedores
 routes.get('/suppliers', SupplierController.index)
+routes.get('/suppliers/:id', SupplierController.indexOne)
 routes.post('/suppliers', SupplierController.store)
 routes.delete('/suppliers/:id', SupplierController.delete)
 routes.put('/suppliers/:id', SupplierController.update)
 
 //rotas de produtos
 routes.get('/products', ProductController.index)
+routes.get('/products/:id', ProductController.indexOne)
 routes.post('/products', ProductController.store)
 routes.delete('/products/:id', ProductController.delete)
 routes.put('/products/:id', ProductController.update)
@@ -42,7 +44,9 @@ routes.delete('/equipment/:id', EquipmentController.delete)
 routes.put('/equipment/:id', EquipmentController.update)
 
 //rotas de fornecedores_produtos
+routes.get('/suppliers-products', SupplierProductController.index)
 routes.get('/suppliers-products/products', SupplierProductController.indexProducts)
+routes.get('/suppliers-products/products/:idProduct', SupplierProductController.indexOneProducts)
 routes.post('/suppliers-products', SupplierProductController.store)
 routes.delete('/suppliers-products', SupplierProductController.delete)
 
@@ -54,6 +58,7 @@ routes.put('/lote-volumes/:id', LoteVolumeController.update)
 
 //rotas de moves
 routes.get('/moves', MoveController.index)
+routes.get('/moves/:id', MoveController.indexOne)
 routes.post('/moves', MoveController.store)
 routes.delete('/moves/:id', MoveController.delete)
 routes.put('/moves/:id', MoveController.update)
@@ -61,6 +66,7 @@ routes.put('/moves/:id', MoveController.update)
 //rotas de move itens
 routes.get('/move-itens', MoveItensController.index)
 routes.get('/move-itens/:idMove', MoveItensController.indexOne)
+routes.get('/move-itens/move/:id', MoveItensController.indexOneMove)
 routes.post('/move-itens', MoveItensController.store)
 routes.delete('/move-itens/:id', MoveItensController.delete)
 routes.put('/move-itens/:id', MoveItensController.update)
@@ -68,17 +74,24 @@ routes.put('/move-itens/:id', MoveItensController.update)
 //rotas de lotes
 routes.get('/lotes', LoteItensController.index)
 routes.get('/lotes/:codigo', LoteItensController.indexOne)
-routes.get('/lotes/moveitensvolume/:idMove', LoteItensController.indexMoveItensVolume)
+routes.get('/lotes/moveitensvolume/:idMove/:codigo', LoteItensController.indexMoveItensVolume)
 routes.post('/lotes', LoteItensController.store)
 routes.delete('/lotes/:id', LoteItensController.delete)
 routes.put('/lotes/:id', LoteItensController.update)
 
 //rotas de MoveItensVolume
 routes.get('/move-itens-volumes', MoveItensVolumeController.index)
-routes.get('/move-itens-volumes/:idMoveitens', MoveItensVolumeController.indexAll)
+routes.get('/move-itens-volumes/:idMove', MoveItensVolumeController.indexAll)
 routes.post('/move-itens-volumes', MoveItensVolumeController.store)
 routes.delete('/move-itens-volumes/:id', MoveItensVolumeController.delete)
 routes.put('/move-itens-volumes/:id', MoveItensVolumeController.update)
+
+//rotas de MoveItensVolumeTable
+routes.get('/move-itens-volumes-tables', MoveItensVolumeTableController.index)
+routes.get('/move-itens-volumes-tables/:idMove', MoveItensVolumeTableController.indexAll)
+routes.post('/move-itens-volumes-tables', MoveItensVolumeTableController.store)
+routes.delete('/move-itens-volumes-tables/:id', MoveItensVolumeTableController.delete)
+routes.put('/move-itens-volumes-tables/:id', MoveItensVolumeTableController.update)
 
 //rotas de analysis
 routes.get('/analysis', AnalysisController.index)

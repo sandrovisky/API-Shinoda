@@ -8,7 +8,6 @@ module.exports = {
         timestamps: true
     },
     options: {
-        instanceName: 'MSSQLSERVER',
-        
+        instanceName: 'MSSQLSERVER',        
     }
 }

@@ -14,6 +14,7 @@ class MoveItensVolume extends Model {
     static associate(models) {
         this.belongsTo(models.MoveItens, { foreignKey: 'idMoveitens', as: 'moveitens' })
         this.belongsTo(models.LoteItens, { foreignKey: 'idLoteitens', as: 'lote' })
+        this.hasMany(models.Move, { foreignKey: 'id', as: 'move' })
     }
 } 
 

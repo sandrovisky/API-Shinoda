@@ -9,6 +9,13 @@ module.exports = {
         return res.json(result)
     },
 
+    //Função que vai retornar objeto com todos os cadastros
+    async indexOne(req, res){
+        const { id } = req.params
+        const result =  await Supplier.findOne({ where: { id } })
+        return res.json(result)
+    },
+
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
         const {id, nomeFantasia, razaoSocial, endereco, cnpj} = req.body        

@@ -32,17 +32,19 @@ module.exports = {
 
     async indexOne(req, res){
 
-        const {idMove} = req.params
-        const result =  await MoveItens.findAll( {where: {idMove},include: {association: 'product'}})
+        const { idMove } = req.params
+        const result =  await MoveItens.findAll( {where: { idMove }, include: { association: 'product' }})
         return res.json(result)
     },
 
-    async indexOne(req, res){
+    async indexOneMove(req, res){
 
-        const {idMove} = req.params
-        const result =  await MoveItens.findAll( {where: {idMove},include: {association: 'product'}})
+        const { id } = req.params
+        const result =  await MoveItens.findAll( {where: { id }, include: { association: 'product' } })
         return res.json(result)
     },
+
+    
 
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
@@ -68,7 +70,7 @@ module.exports = {
             console.log({message: "Produto deletado da lista"})
         })
         .catch(() => {
-            res.status(400).json({message: "Erro ao deletar produto"});
+            res.status(400).json({message: "Produto ja vinculado ao um lote\nExclua ele do lote primeiro"});
             console.log({message: "Erro ao deletar produto"});
         })
     },

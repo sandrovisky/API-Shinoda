@@ -52,12 +52,13 @@ module.exports = {
 
     async indexMoveItensVolume(req, res){
 
-        const {idMove} = req.params
-        const result =  await LoteItens.findAll(
-            { 
+        const {idMove, codigo } = req.params
+        const result =  await LoteItens.findOne(
+            { where: {codigo},
             include: 
                 [
                     {
+                        
                         association: 'moveitensvolume'
                     },
                     {
@@ -182,11 +183,9 @@ module.exports = {
                 }
             }
         })
+        
 
-        let A = result1[result1.length - 1].codigo.slice(10)
-        A = parseInt(A)
-
-        var numero = A+1
+        let numero = `${result1.length}`
         while (numero.length < 3){
             numero = "0"+ numero
         }
