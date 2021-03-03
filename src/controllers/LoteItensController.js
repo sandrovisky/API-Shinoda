@@ -93,44 +93,6 @@ module.exports = {
         return res.json(result)
     },
 
-    async indexOne(req, res){
-        const { codigo } = req.params
-        const result =  await LoteItens.findOne(
-            { 
-            where: {codigo},
-            include: [
-            {
-                model: Analysis, 
-                as: 'analysis' 
-            },
-            {
-                
-                association: 'moveitensvolume' 
-            },
-            {
-                model: MoveItens, 
-                as: 'moveitens',
-                include: [
-                    {
-                        model: Product,
-                        as: 'product'
-                    },
-                    {
-                        model: Move,
-                        as: 'move',
-                        include: [
-                            {
-                                model: Supplier,
-                                as: 'supplier'
-                            }
-                        ]
-                    }
-                ]
-            }
-        ] })
-        return res.json(result)
-    },
-
     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
     async delete(req, res){
         const { id } = req.body
@@ -163,37 +125,9 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        var dataAtual = new Date();
-        var dia = dataAtual.getDate();
-        var mes = (dataAtual.getMonth() + 1);
-        var ano = dataAtual.getFullYear();
-
-        if (mes < 10) {
-            mes = "0" + mes
-        }
-
-        var dataHoje = `${ano}-${mes}-${dia}`
-
-        let codigo = `${dia}${mes}.${ano}-`
-        
-        const result1 =  await LoteItens.findAll({
-            where: {
-                createdAt: {
-                    [Op.startsWith]: dataHoje
-                }
-            }
-        })
-        
-
-        let numero = `${result1.length}`
-        while (numero.length < 3){
-            numero = "0"+ numero
-        }
-        codigo += numero
-
-        const { numLaudo, dataValidade, createdBy, updatedBy, idMoveitens } = req.body
+        const { laudo, lote, dataValidade, createdBy, updatedBy, idMoveitens } = req.body
     
-        const result = await LoteItens.create({ codigo, numLaudo, dataValidade, createdBy, updatedBy, idMoveitens })
+        const result = await LoteItens.create({ laudo, lote, dataValidade, createdBy, updatedBy, idMoveitens })
         
         return res.json(result)
         

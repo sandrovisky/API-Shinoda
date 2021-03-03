@@ -16,15 +16,6 @@ module.exports = {
                 },
                 onUpdate: 'CASCADE',
                 onDelete: 'NO ACTION'
-            },        
-            idMoveitensvolume: {
-                type: Sequelize.INTEGER,
-                references: {
-                    model: 'moveitensvolumes',
-                    key: 'id'
-                },
-                onUpdate: 'CASCADE',
-                onDelete: 'NO ACTION'
             },
             idProduct: {
                 type: Sequelize.INTEGER,

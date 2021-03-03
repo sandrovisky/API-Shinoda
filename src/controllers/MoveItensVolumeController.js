@@ -1,9 +1,6 @@
-const { Model } = require('sequelize')
-const LoteItens = require('../model/LoteItens')
-const Move = require('../model/Move')
 const MoveItens = require('../model/MoveItens')
 const MoveItensVolume = require('../model/MoveItensVolume')
-const Product = require('../model/Product')
+const { Op } = require("sequelize");
 
 module.exports = {
 
@@ -13,13 +10,16 @@ module.exports = {
             {
                 association: 'moveitens',
                 include: [
-                   { 
-                       association: 'product'
-                    }
+                    {   
+                        association: 'product', 
+                    },
                 ]
             },
             {
                 association: 'lote'
+            },
+            {
+                association: 'move'
             }
         ]})
         return res.json(result)
@@ -46,6 +46,55 @@ module.exports = {
         return res.json(result)
     },
 
+    async indexMove(req, res){
+        const { lastId, quantidadePaletes } = req.params
+        console.log(lastId)
+        console.log(quantidadePaletes)
+        
+        const result =  await MoveItensVolume.findAll({ 
+            where: 
+            { 
+                id:
+                {
+                    [Op.between]: [(lastId-quantidadePaletes+1),lastId]
+                } 
+            },
+            include: {
+                association: 'moveitens',
+                include: [
+                    {
+                        association: 'product'
+                    }
+                ]
+            }
+        })
+        return res.json(result)
+    },
+
+    async indexEntrada(req, res){
+        const { lastId, quantidadePaletes, codigo } = req.params
+        
+        const result =  await MoveItensVolume.findOne({ 
+            where: 
+            { 
+                id:
+                {
+                    [Op.between]: [(lastId-quantidadePaletes+1),lastId]
+                },
+                codigo: codigo
+            },
+            include: {
+                association: 'moveitens',
+                include: [
+                    {
+                        association: 'product'
+                    }
+                ]
+            }
+        })
+        return res.json(result)
+    },
+
     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
     async delete(req, res){
         const { id } = req.body
@@ -63,9 +112,9 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
 
-        const { idMoveitens, idLote, quantidadePalete, quantidadeTotal, createdBy, updatedBy, id } = req.body        
+        const { leitura, id } = req.body        
 
-        await MoveItensVolume.update({ idMoveitens, idLote, quantidadePalete, quantidadeTotal, createdBy, updatedBy }, { where: { id } })
+        await MoveItensVolume.update({ leitura }, { where: { id } })
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})
@@ -78,12 +127,16 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
+
         const { idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy, updatedBy } = req.body
 
-            const result = await MoveItensVolume.create({ idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy, updatedBy })
-            
-            return res.json(result)
+        const result = await MoveItensVolume.create({ idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy, updatedBy })
+
+        result.codigo = "ENT" + result.id 
         
+        await result.save()
+        
+        return res.json(result)        
     }
 }
 

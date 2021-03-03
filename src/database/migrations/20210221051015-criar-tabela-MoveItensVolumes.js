@@ -26,6 +26,11 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'NO ACTION'
         },
+        leitura: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false,
+        },
+        codigo: Sequelize.STRING,
         quantidadePaletes: Sequelize.INTEGER,
         quantidadeTotal: Sequelize.STRING,
         createdBy: Sequelize.INTEGER,

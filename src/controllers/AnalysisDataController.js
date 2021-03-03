@@ -9,6 +9,13 @@ module.exports = {
         return res.json(result)
     },
 
+    //Função que vai retornar objeto os cadastros da idmoveitensvolume informado
+    async indexFinalizado(req, res){
+        const { idMoveitensvolume } = req.params
+        const result =  await AnalysisData.findOne({ where: { idMoveitensvolume } })
+        return res.json(result)
+    },
+
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
         const { idAnalysis, idMoveitensvolume, idProduct, quantidadeIntegral, quantidadeGema, quantidadeClara, quantidadeCasca, id } = req.body        

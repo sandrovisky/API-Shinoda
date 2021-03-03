@@ -3,9 +3,9 @@ const { Model, DataTypes } = require('sequelize')
 class LoteItens extends Model {
     static init (sequelize) {
         super.init({
-        codigo: DataTypes.STRING,
         dataValidade: DataTypes.STRING,
-        numLaudo: DataTypes.STRING,
+        laudo: DataTypes.STRING,
+        lote: DataTypes.STRING,
         createdBy: DataTypes.INTEGER,
         updatedBy: DataTypes.INTEGER,
         }, {

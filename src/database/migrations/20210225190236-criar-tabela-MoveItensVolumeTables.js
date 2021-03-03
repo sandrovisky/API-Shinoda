@@ -26,11 +26,19 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'NO ACTION'
         },
+        idAnalysis: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'analyses',
+                key: 'id'
+            },
+            onUpdate: 'CASCADE',
+            onDelete: 'NO ACTION'
+        },
         lastId: Sequelize.INTEGER,
         quantidadePaletes: Sequelize.INTEGER,
         quantidadeTotal: Sequelize.INTEGER,
         produto: Sequelize.STRING,
-        codigoLote: Sequelize.STRING,
         validade: Sequelize.STRING,
         createdBy: Sequelize.INTEGER,
         updatedBy: Sequelize.INTEGER,

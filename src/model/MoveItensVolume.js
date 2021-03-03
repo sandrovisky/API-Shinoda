@@ -3,6 +3,8 @@ const { Model, DataTypes } = require('sequelize')
 class MoveItensVolume extends Model {
     static init (sequelize) {
         super.init({
+        leitura:  DataTypes.BOOLEAN,
+        codigo: DataTypes.STRING,
         quantidadePaletes: DataTypes.INTEGER,
         quantidadeTotal: DataTypes.STRING,
         createdBy: DataTypes.INTEGER,

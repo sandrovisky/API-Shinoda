@@ -7,7 +7,6 @@ class MoveItensVolumeTable extends Model {
         lastId: DataTypes.INTEGER,
         quantidadeTotal: DataTypes.STRING,
         produto: DataTypes.STRING,
-        codigoLote: DataTypes.STRING,
         validade: DataTypes.STRING,
         createdBy: DataTypes.INTEGER,
         updatedBy: DataTypes.INTEGER,
@@ -17,7 +16,9 @@ class MoveItensVolumeTable extends Model {
     }
     static associate(models) {        
         this.belongsTo(models.Move, { foreignKey: 'idMove', as: 'move' })
-        this.belongsTo(models.LoteItens, { foreignKey: 'idLoteitens', as: 'loteitens' })
+        this.belongsTo(models.LoteItens, { foreignKey: 'idLoteitens', as: 'loteitens' })        
+        this.belongsTo(models.Analysis, { foreignKey: 'idAnalysis', as: 'analysis' })                
+        this.hasMany(models.MoveItensVolume, { foreignKey: 'id', as: 'moveitensvolume' })
     }
 } 
 

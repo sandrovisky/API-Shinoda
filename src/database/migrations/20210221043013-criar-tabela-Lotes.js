@@ -17,8 +17,8 @@ module.exports = {
                 onUpdate: 'CASCADE',
                 onDelete: 'NO ACTION'
             }, 
-            codigo: Sequelize.STRING,
-            numLaudo: Sequelize.STRING,
+            laudo: Sequelize.STRING,
+            lote: Sequelize.STRING,
             dataValidade: Sequelize.STRING,            
             createdBy: Sequelize.INTEGER,
             updatedBy: Sequelize.INTEGER,

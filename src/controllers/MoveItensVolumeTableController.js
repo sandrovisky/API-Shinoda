@@ -4,14 +4,85 @@ module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
-        const result =  await MoveItensVolumeTable.findAll()
+        const result =  await MoveItensVolumeTable.findAll({
+            include: [
+                {
+                    association: 'move',
+                    include: [
+                        {
+                            association: 'supplier'
+                        }
+                    ]
+                },
+                {
+                    association: 'analysis'
+                },
+                {
+                    association: 'loteitens'
+                }
+            ]
+            
+        })
+        return res.json(result)
+    },
+
+    //Função que vai retornar objeto com o registro da pk
+    async indexTable(req, res){
+        const { id } = req.params
+        const result =  await MoveItensVolumeTable.findOne({where: {id},
+            include: [
+                {
+                    association: 'move',
+                    include: [
+                        {
+                            association: 'supplier'
+                        }
+                    ]
+                },
+                {
+                    association: 'analysis'
+                },
+                {
+                    association: 'loteitens'
+                }
+            ]
+            
+        })
         return res.json(result)
     },
 
     //função q mostra os resultados da pesquisa por idMove
     async indexAll(req, res){
         const { idMove } = req.params
-        const result =  await MoveItensVolumeTable.findAll({ where: { idMove } })
+        const result =  await MoveItensVolumeTable.findAll({ where: { idMove },
+            include: 
+            [
+                {
+                    association: 'move',
+                    include: [
+                        {
+                            association: 'supplier'
+                        }
+                    ]
+                },
+                {
+                    association: 'analysis'
+                },
+                {
+                    association: 'loteitens',
+                    include: [
+                        {
+                            association: 'moveitens',
+                            include: [
+                                {
+                                    association: 'product'
+                                },
+                            ]
+                        }
+                    ]
+                }
+            ] 
+        })
         return res.json(result)
     },
 
@@ -31,10 +102,10 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
+        const { id } = req.params
+        const { idAnalysis } = req.body        
 
-        const { idMoveitens, idLote, quantidadePalete, quantidadeTotal, createdBy, updatedBy, id } = req.body        
-
-        await MoveItensVolumeTable.update({ idMoveitens, idLote, quantidadePalete, quantidadeTotal, createdBy, updatedBy }, { where: { id } })
+        await MoveItensVolumeTable.update({ idAnalysis }, { where: { id } })
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})

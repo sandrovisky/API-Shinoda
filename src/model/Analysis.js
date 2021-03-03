@@ -12,7 +12,7 @@ class Analysis extends Model {
     }
     static associate(models) {
         this.belongsTo(models.Product, { foreignKey: 'idProduct', as: 'product' })
-        this.belongsTo(models.LoteItens, { foreignKey: 'id', as: 'loteitens' })
+        this.belongsTo(models.LoteItens, { foreignKey: 'idLoteitens', as: 'loteitens' })
     }
 } 
 
