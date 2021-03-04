@@ -5,22 +5,12 @@ module.exports = {
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
         const result =  await User.findAll()
-        res.setHeader('Access-Control-Allow-Origin', '*');
-
-        res.setHeader('Access-Control-Allow-Headers', '*');
-
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         return res.json(result)
     },
 
     //Função que vai receber uma string de 'usuario' e retornar um objeto, caso ja exista o usuario, ou null
     async findUser(req, res){
         const {usuario} = req.params
-        res.setHeader('Access-Control-Allow-Origin', '*');
-
-        res.setHeader('Access-Control-Allow-Headers', '*');
-
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
         const result =  await User.findOne({ where: { usuario } })
         
@@ -32,12 +22,7 @@ module.exports = {
     async update(req, res){
 
         const { id } = req.params
-        const { senha } = req.body  
-        res.setHeader('Access-Control-Allow-Origin', '*');
-
-        res.setHeader('Access-Control-Allow-Headers', '*');
-
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');      
+        const { senha } = req.body        
 
         await User.update({ senha },{where: {id}})
         .then(() => {
@@ -53,11 +38,6 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
         const { usuario, senha } = req.body
-        res.setHeader('Access-Control-Allow-Origin', '*');
-
-        res.setHeader('Access-Control-Allow-Headers', '*');
-
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
         //constante que sera utilizada para verificar se ja existe um mesmo usuario cadastrado
         const verificaCadastro =  await User.findOne({ where: { usuario } });
