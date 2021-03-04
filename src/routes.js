@@ -17,7 +17,7 @@ const AnalysisDataController = require('./controllers/AnalysisDataController')
 const routes = express.Router()
 
 routes.get('/', (req, res) => {
-    res.json("foi")
+    SupplierController.index
 })
 
 //rotas de fornecedores
