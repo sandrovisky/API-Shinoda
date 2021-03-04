@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mssql": "^6.3.1",
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0"
+  }
+}
