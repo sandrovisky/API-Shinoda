@@ -1,18 +1,44 @@
+const { associations } = require('../model/Analysis')
 const Analysis = require ('../model/Analysis')
 
 module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
-        const result =  await Analysis.findAll({include: 'loteitens'})
+        const result =  await Analysis.findAll({include: 
+            [
+                {
+                    association: 'loteitens',
+                },
+                {
+                    association: 'analysisdata'
+                }
+            ]
+        })
+        return res.json(result)
+    },
+
+    async indexOne(req, res){
+        const { id } = req.params
+        const result =  await Analysis.findOne({ where: { id }, include: 
+            [
+                {                    
+                    association: 'loteitens',
+                },
+                {
+                    association: 'analysisdata'
+                }
+            ]
+        })
         return res.json(result)
     },
 
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
-        const { status, idProduct, idLote, id } = req.body        
+        const { id } = req.params
+        const { status } = req.body        
 
-        await Analysis.update({ status, idProduct, idLote }, { where: { id }, force: true}) 
+        await Analysis.update({ status }, { where: { id }, force: true}) 
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})

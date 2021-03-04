@@ -16,6 +16,7 @@ class LoteItens extends Model {
         this.belongsTo(models.MoveItens, { foreignKey: 'idMoveitens', as: 'moveitens' })
         this.hasOne(models.Analysis, { foreignKey: 'idLoteitens', as: 'analysis' })
         this.hasOne(models.MoveItensVolume, { foreignKey: 'idLoteitens', as: 'moveitensvolume' })
+        this.hasOne(models.MoveItensVolumeTable, { foreignKey: 'id', as: 'moveitensvolumetable' })
     }
 } 
 

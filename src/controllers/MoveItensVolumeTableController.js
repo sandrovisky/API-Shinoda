@@ -15,7 +15,7 @@ module.exports = {
                     ]
                 },
                 {
-                    association: 'analysis'
+                    association: 'analysis',
                 },
                 {
                     association: 'loteitens'
@@ -40,13 +40,22 @@ module.exports = {
                     ]
                 },
                 {
-                    association: 'analysis'
+                    association: 'analysis',
+                    include: [
+                        {
+                            association: 'analysisdata'
+                        }
+                    ]
                 },
                 {
-                    association: 'loteitens'
-                }
-            ]
-            
+                    association: 'loteitens',
+                    include: [
+                        {
+                            association: 'moveitens'
+                        }
+                    ]
+                },                
+            ]            
         })
         return res.json(result)
     },
@@ -66,7 +75,12 @@ module.exports = {
                     ]
                 },
                 {
-                    association: 'analysis'
+                    association: 'analysis',
+                    include: [
+                        {
+                            association: 'analysisdata'
+                        }
+                    ]
                 },
                 {
                     association: 'loteitens',

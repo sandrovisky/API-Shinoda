@@ -5,14 +5,27 @@ module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
-        const result =  await AnalysisData.findAll()
+        const result =  await AnalysisData.findAll({
+            include: [
+                {
+                    association: 'analysis'
+                }
+            ]
+        })
         return res.json(result)
     },
 
     //Função que vai retornar objeto os cadastros da idmoveitensvolume informado
-    async indexFinalizado(req, res){
-        const { idMoveitensvolume } = req.params
-        const result =  await AnalysisData.findOne({ where: { idMoveitensvolume } })
+    async indexOne(req, res){
+        const { idAnalysis } = req.params
+
+        const result =  await AnalysisData.findOne( {where: {idAnalysis}, include:
+        [
+            {
+                association: 'analysis',                
+            }
+        ]
+    })
         return res.json(result)
     },
 

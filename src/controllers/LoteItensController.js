@@ -43,6 +43,53 @@ module.exports = {
                                 ]
                             }
                         ]
+                    },
+                    {
+                        association: 'moveitensvolumetable'
+                    }
+                ]
+            } 
+        )
+        return res.json(result)
+    },
+
+    async indexTables(req, res){
+        const {codigo} = req.params
+        const result =  await LoteItens.findOne(
+            { 
+            include: 
+                [
+                    {
+                        association: 'moveitensvolume',
+                        where: {codigo},
+                    },
+                    {
+                        model: Analysis, 
+                        as: 'analysis' 
+                    },
+                    {
+                        model: MoveItens, 
+                        as: 'moveitens',
+                        include: 
+                        [
+                            {
+                                model: Product,
+                                as: 'product'
+                            },
+                            {
+                                model: Move,
+                                as: 'move',
+                                include: [
+                                    {
+                                        model: Supplier,
+                                        as: 'supplier'
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        association: 'moveitensvolumetable'
                     }
                 ]
             } 

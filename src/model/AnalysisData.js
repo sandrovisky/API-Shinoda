@@ -15,7 +15,6 @@ class AnalysisData extends Model {
     }
     static associate(models) {
         this.belongsTo(models.Analysis, { foreignKey: 'idAnalysis', as: 'analysis' })
-        this.belongsTo(models.MoveItensVolumeTable, { foreignKey: 'idMoveitensvolumetable', as: 'moveitensvolumetable' })
         this.belongsTo(models.Product, { foreignKey: 'idProduct', as: 'product' })
     }
 } 

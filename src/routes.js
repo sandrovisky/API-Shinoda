@@ -66,6 +66,7 @@ routes.put('/move-itens/:id', MoveItensController.update)
 
 //rotas de lotes
 routes.get('/lotes', LoteItensController.index)
+routes.get('/lotes/table/:codigo', LoteItensController.indexTables)
 routes.post('/lotes', LoteItensController.store)
 routes.delete('/lotes/:id', LoteItensController.delete)
 routes.put('/lotes/:id', LoteItensController.update)
@@ -88,14 +89,15 @@ routes.delete('/move-itens-volumes-tables/:id', MoveItensVolumeTableController.d
 routes.put('/move-itens-volumes-tables/:id', MoveItensVolumeTableController.update)
 
 //rotas de analysis
-routes.get('/analysis', AnalysisController.index)
-routes.post('/analysis', AnalysisController.store)
-routes.delete('/analysis/:id', AnalysisController.delete)
-routes.put('/analysis/:id', AnalysisController.update)
+routes.get('/analyses', AnalysisController.index)
+routes.get('/analyses/:id', AnalysisController.indexOne)
+routes.post('/analyses', AnalysisController.store)
+routes.delete('/analyses/:id', AnalysisController.delete)
+routes.put('/analyses/:id', AnalysisController.update)
 
 //rotas de dados das analises
 routes.get('/analysis-data', AnalysisDataController.index)
-routes.get('/analysis-data/:idMoveitensvolume', AnalysisDataController.indexFinalizado)
+routes.get('/analysis-data/:idAnalysis', AnalysisDataController.indexOne)
 routes.post('/analysis-data', AnalysisDataController.store)
 routes.delete('/analysis-data/:id', AnalysisDataController.delete)
 routes.put('/analysis-data/:id', AnalysisDataController.update)
