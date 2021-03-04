@@ -5,9 +5,6 @@ module.exports = {
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
         const result =  await User.findAll()
-        
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With");
         return res.json(result)
     },
 
