@@ -5,6 +5,7 @@
     "heroku": "^7.50.0",
     "mssql": "^6.3.1",
     "sequelize": "^6.5.0",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "tedious": "^11.0.5"
   }
 }
