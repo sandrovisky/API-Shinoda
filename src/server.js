@@ -6,15 +6,14 @@ require('./database/index')
 
 const app = express()
 
-app.use(cors())
-// app.use((req, res, next) => {
-//     res.header("Access-Control-Allow-Origin", "*")
-//     res.header("Access-Control-Allow-Headers", "*")
-//     res.header("Access-Control-Allow-Methods", "*")
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "*")
+    res.header("Access-Control-Allow-Methods", "*")
     
-//     app.use(cors)
-//     next()
-// })
+    app.use(cors)
+    next()
+})
 
 app.use(express.json())
 
