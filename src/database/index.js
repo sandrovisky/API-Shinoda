@@ -16,22 +16,7 @@ const Analysis = require('../model/Analysis')
 const AnalysisData = require('../model/AnalysisData')
 
 
-const connection = new Sequelize('shinoda1', 'sandrovisky', 'shinoda!123', {
-    host: 'sandrovisky.database.windows.net',
-    dialect: 'mssql',
-  
-    // Use this if you're on Windows Azure
-    dialectOptions: { 
-      encrypt: true 
-    },
-  
-    pool: {
-      max: 5,
-      min: 0,
-      idle: 10000
-    },
-  
-  })
+const connection = new Sequelize(dbConfig)
 
 
 Supplier.init(connection)

@@ -50,7 +50,6 @@ module.exports = {
         const { nomeFantasia, razaoSocial, endereco, cnpj } = req.body
 
         const result = await Supplier.create({  nomeFantasia, razaoSocial, endereco, cnpj })
-        result.message = "sucessooooooooooo"
         return res.json(result)
 
     },
