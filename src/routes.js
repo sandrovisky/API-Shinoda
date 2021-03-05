@@ -1,7 +1,5 @@
 const express = require('express')
 
-const Supplier  = require ('../model/Supplier')
-
 //importação dos controladores
 const SupplierController = require('./controllers/SupplierController')
 const ProductController = require('./controllers/ProductController')
@@ -18,9 +16,8 @@ const AnalysisDataController = require('./controllers/AnalysisDataController')
 
 const routes = express.Router()
 
-routes.get('/', async (req, res) => {
-    const result =  await Supplier.findAll()
-    return res.json(result)
+routes.get('/', (req, res) => {
+    res.json("foi")
 })
 
 //rotas de fornecedores
