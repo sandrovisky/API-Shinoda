@@ -18,6 +18,7 @@ const routes = express.Router()
 
 routes.get('/', (req, res) => {
     res.json("foi")
+    console.log("Database_URL", process.env.DATABASE_URL);
 })
 
 //rotas de fornecedores
