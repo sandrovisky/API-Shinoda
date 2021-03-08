@@ -14,11 +14,12 @@ const MoveItensVolume = require('../model/MoveItensVolume')
 const MoveItensVolumeTable = require('../model/MoveItensVolumeTable')
 const Analysis = require('../model/Analysis')
 const AnalysisData = require('../model/AnalysisData')
+const Storage = require('../model/Storage')
 
 
 const connection = new Sequelize(dbConfig)
 
-
+Storage.init(connection)
 Supplier.init(connection)
 Product.init(connection)
 User.init(connection)

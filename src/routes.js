@@ -1,6 +1,7 @@
 const express = require('express')
 
 //importação dos controladores
+const StorageController = require('./controllers/StorageController')
 const SupplierController = require('./controllers/SupplierController')
 const ProductController = require('./controllers/ProductController')
 const UserController = require('./controllers/UserController')
@@ -41,6 +42,11 @@ routes.get('/users/login/:usuario/:senha', UserController.indexLogin)
 routes.get('/users/:usuario', UserController.findUser)
 routes.post('/users', UserController.store)
 routes.put('/users/:id', UserController.update)
+
+//rotas de storage
+routes.get('/storages', StorageController.index)
+routes.post('/storages', StorageController.store)
+routes.put('/storages/:id', StorageController.update)
 
 //rotas de equipamentos
 routes.get('/equipment', EquipmentController.index)
