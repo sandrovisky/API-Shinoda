@@ -97,8 +97,9 @@ module.exports = {
 
     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
     async delete(req, res){
+        
         const { id } = req.body
-        await MoveItensVolume.destroy({ where: { id }, force: true})
+        await MoveItensVolume.destroy({ where: {id: id }, force: true})
         .then(() => {
             res.status(200).json({message: "Cadastro deletado com sucesso"});
             console.log({message: "Cadastro deletado com sucesso"})
@@ -106,6 +107,20 @@ module.exports = {
         .catch(() => {
             res.status(400).json({message: "Erro ao deletar cadastro"});
             console.log({message: "Erro ao deletar cadastro"});
+        })
+    },
+
+     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
+     async deletePesos(req, res){
+        const { idLoteitens, quantidadeTotal, quantidadePaletes } = req.params
+        await MoveItensVolume.destroy({ where: { idLoteitens, quantidadePaletes, quantidadeTotal }, force: true})
+        .then(() => {            
+            console.log({message: "Cadastro deletado com sucesso"})
+            return res.status(200).json({message: "Cadastro deletado com sucesso"});
+        })
+        .catch(() => {            
+            console.log({message: "Erro ao deletar cadastro"});
+            return res.status(400).json({message: "Erro ao deletar cadastro"});
         })
     },
 
@@ -128,15 +143,20 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
 
-        const { idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy, updatedBy } = req.body
+        const { idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy } = req.body
 
-        const result = await MoveItensVolume.create({ idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy, updatedBy })
+        let resultall = []
 
-        result.codigo = "ENT" + result.id 
+        for ( let i = 0; i < quantidadePaletes; i++) {
+            const result = await MoveItensVolume.create({ idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy })
+
+            result.codigo = "ENT" + result.id 
+            
+            await result.save()
+            resultall.push(result)
+        }        
         
-        await result.save()
-        
-        return res.json(result)        
+        return res.json(resultall)        
     }
 }
 

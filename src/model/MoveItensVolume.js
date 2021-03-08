@@ -5,7 +5,7 @@ class MoveItensVolume extends Model {
         super.init({
         leitura:  DataTypes.BOOLEAN,
         codigo: DataTypes.STRING,
-        quantidadePaletes: DataTypes.INTEGER,
+        quantidadePaletes: DataTypes.STRING,
         quantidadeTotal: DataTypes.STRING,
         createdBy: DataTypes.INTEGER,
         updatedBy: DataTypes.INTEGER,

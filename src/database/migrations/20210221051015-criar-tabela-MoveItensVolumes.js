@@ -31,7 +31,7 @@ module.exports = {
             defaultValue: false,
         },
         codigo: Sequelize.STRING,
-        quantidadePaletes: Sequelize.INTEGER,
+        quantidadePaletes: Sequelize.STRING,
         quantidadeTotal: Sequelize.STRING,
         createdBy: Sequelize.INTEGER,
         updatedBy: Sequelize.INTEGER,

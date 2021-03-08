@@ -18,9 +18,6 @@ module.exports = {
                     ],
                 },
                 {
-                    association: 'moveitensvolumetable'
-                },
-                {
                     association: 'supplier'
                 }
             ],
@@ -42,9 +39,6 @@ module.exports = {
                         }
                     ],
                 },
-                {
-                    association: 'moveitensvolumetable'
-                }
             ],
                 
         })
