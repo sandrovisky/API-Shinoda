@@ -8,6 +8,14 @@ module.exports = {
         return res.json(result)
     },
 
+    //Função que vai retornar objeto com todos os cadastros
+    async delete(req, res){
+        const result =  await Storage.destroy({where: {
+            id: 1
+        }})
+        return res.json(result)
+    },
+
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
 
@@ -26,20 +34,11 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { usuario, senha } = req.body
-
-        //constante que sera utilizada para verificar se ja existe um mesmo usuario cadastrado
-        const verificaCadastro =  await Storage.findOne({ where: { usuario } });
-
-        if (verificaCadastro === null) {
-            const result = await Storage.create({ usuario, senha })
-            
-            return res.json(result)
-        } else {
-            console.log({message: "usuario ja cadastrado"});
-            return res.status(400).json({message: "usuario ja cadastrado"})
-        }
+        const { usuario, log } = req.body
+    
+        const result = await Storage.create({ usuario, log })
         
+        return res.json(result)
     }
 }
 

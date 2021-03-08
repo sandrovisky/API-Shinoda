@@ -9,7 +9,7 @@ module.exports = {
                 autoIncrement: true,
             },
             usuario: Sequelize.STRING,
-            log: Sequelize.BOOLEAN,
+            log: Sequelize.STRING,
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE
         })

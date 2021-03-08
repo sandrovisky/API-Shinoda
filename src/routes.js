@@ -45,6 +45,7 @@ routes.put('/users/:id', UserController.update)
 
 //rotas de storage
 routes.get('/storages', StorageController.index)
+routes.delete('/storages', StorageController.delete)
 routes.post('/storages', StorageController.store)
 routes.put('/storages/:id', StorageController.update)
 
