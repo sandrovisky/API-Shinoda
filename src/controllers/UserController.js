@@ -11,11 +11,11 @@ module.exports = {
     //Função que vai retornar objeto com todos os cadastros
     async indexLogin(req, res){
         const { usuario, senha } = req.params
-        const result =  await User.findAll({
+        const result =  await User.findOne({
             where:
                 {
-                    usuario: {usuario},
-                    senha: {senha}
+                    usuario: usuario,
+                    senha: senha
                 },
                 
         })
