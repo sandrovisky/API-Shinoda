@@ -19,9 +19,9 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
 
-        const { senha } = req.body        
+        const { usuario, log } = req.body        
 
-        await Storage.update({ senha },{where: {id: 1}})
+        await Storage.update({ usuario, log }, { where: { id: 1 } })
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})
@@ -37,7 +37,7 @@ module.exports = {
         const { usuario, log } = req.body
     
         const result = await Storage.create({ usuario, log })
-        
+
         return res.json(result)
     }
 }
