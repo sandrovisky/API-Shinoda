@@ -14,8 +14,8 @@ module.exports = {
         const result =  await User.findAll({
             where:
                 {
-                    usuario,
-                    senha
+                    usuario: {usuario},
+                    senha: {senha}
                 },
                 
         })
