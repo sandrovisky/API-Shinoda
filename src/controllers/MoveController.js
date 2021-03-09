@@ -20,6 +20,23 @@ module.exports = {
         return res.json(result)
     },
 
+    async indexByProduct(req, res){
+        
+        const { idProduct } = req.params
+
+        const result =  await Move.findOne({ include: 
+            [
+                {
+                    association: 'moveitens',
+                    where: { idProduct }
+                },
+            ],
+                
+        })
+        return res.json(result)
+    },
+
+
     async indexOne(req, res){
         const { id } = req.params
         const result =  await Move.findAll({where: { id }, include: 

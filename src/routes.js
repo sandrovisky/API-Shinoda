@@ -56,6 +56,7 @@ routes.delete('/suppliers-products', SupplierProductController.delete)
 
 //rotas de moves
 routes.get('/moves', MoveController.index)
+routes.get('/moves/product/:idProduct', MoveController.indexByProduct)
 routes.get('/moves/:id', MoveController.indexOne)
 routes.post('/moves', MoveController.store)
 routes.delete('/moves/:id', MoveController.delete)
