@@ -46,42 +46,37 @@ module.exports = {
         return res.json(result)
     },
 
-    async indexMove(req, res){
-        const { lastId, quantidadePaletes } = req.params
-        console.log(lastId)
-        console.log(quantidadePaletes)
-        
-        const result =  await MoveItensVolume.findAll({ 
+    async indexCodigo(req, res){
+        const { codigo } = req.params        
+        const result =  await MoveItensVolume.findOne({ 
             where: 
             { 
-                id:
-                {
-                    [Op.between]: [(lastId-quantidadePaletes+1),lastId]
-                } 
+                codigo
             },
-            include: {
-                association: 'moveitens',
-                include: [
-                    {
-                        association: 'product'
-                    }
-                ]
-            }
+            include: [
+                {
+                    association: 'lote',
+                    include: [
+                        {
+                            association: 'analysis'
+                        }
+                    ]
+                },
+                {
+                    association: 'moveitens'
+                }
+            ]
         })
         return res.json(result)
     },
 
-    async indexEntrada(req, res){
-        const { lastId, quantidadePaletes, codigo } = req.params
+    async indexByLote(req, res){
+        const { idLoteitens } = req.params
         
-        const result =  await MoveItensVolume.findOne({ 
+        const result =  await MoveItensVolume.findAll({ 
             where: 
             { 
-                id:
-                {
-                    [Op.between]: [(lastId-quantidadePaletes+1),lastId]
-                },
-                codigo: codigo
+                idLoteitens
             },
             include: {
                 association: 'moveitens',

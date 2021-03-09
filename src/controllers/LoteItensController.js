@@ -53,9 +53,31 @@ module.exports = {
     async indexLote(req, res){
         const { id } =req.params
         const result =  await LoteItens.findOne({ where: { id },
-            include: {
-                association: 'moveitensvolume'
-            }
+            include: [
+                {
+                    association: 'moveitensvolume'
+                },
+                {
+                    association: 'moveitens',
+                    include: [
+                        {
+                            association: 'product'
+                        },
+                        {
+                            association: 'move',
+                            include: 'supplier'
+                        }
+                    ]
+                },
+                {
+                    association: 'analysis',
+                    include: [
+                        {
+                            association: 'analysisdata'
+                        }
+                    ]
+                }
+            ]
         })
         return res.json(result)
     },
@@ -209,9 +231,9 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
 
-        const { codigo, numLaudo, dataValidade, createdBy, updatedBy, idMoveitens, id } = req.body        
+        const { codigo, numLaudo, dataValidade, createdBy, updatedBy, idMoveitens, id, coletado } = req.body        
 
-        await LoteItens.update({ codigo, numLaudo, dataValidade, createdBy, updatedBy, idMoveitens }, { where: { id } })
+        await LoteItens.update({ codigo, numLaudo, dataValidade, createdBy, updatedBy, idMoveitens, coletado }, { where: { id } })
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})

@@ -14,7 +14,7 @@ class Move extends Model {
     }
     static associate(models) {
         this.belongsTo(models.Supplier, { foreignKey: 'idSupplier', as: 'supplier' })
-        this.hasOne(models.MoveItens, { foreignKey: 'id', as: 'moveitens' })
+        this.hasOne(models.MoveItens, { foreignKey: 'idMove', as: 'moveitens' })
     }
 } 
 

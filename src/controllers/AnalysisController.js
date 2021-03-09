@@ -35,8 +35,7 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
-        const { id } = req.params
-        const { status } = req.body        
+        const { status, id } = req.body        
 
         await Analysis.update({ status }, { where: { id }, force: true}) 
         .then(() => {

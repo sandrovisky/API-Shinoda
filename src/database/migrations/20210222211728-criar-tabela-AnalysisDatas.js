@@ -17,15 +17,6 @@ module.exports = {
                 onUpdate: 'CASCADE',
                 onDelete: 'NO ACTION'
             },
-            idProduct: {
-                type: Sequelize.INTEGER,
-                references: {
-                    model: 'products',
-                    key: 'id'
-                },
-                onUpdate: 'CASCADE',
-                onDelete: 'NO ACTION'
-            },
             quantidadeIntegral: Sequelize.STRING,        
             quantidadeGema: Sequelize.STRING,
             quantidadeClara: Sequelize.STRING,

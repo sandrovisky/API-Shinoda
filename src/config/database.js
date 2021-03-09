@@ -1,13 +1,18 @@
 module.exports = {
-    username: 'admin', //username created from SQL Management Studio
-    password: 'admin',
-    server: 'localhost/SQLEXPRESS',    //the IP of the machine where SQL Server runs
-    dialect: "mssql",
-    database: 'Shinoda',
-    define: {
-        timestamps: true
+    database: 'shinoda1', 
+    username: 'sandrovisky', 
+    password: 'shinoda!123', 
+    host: 'sandrovisky.database.windows.net',
+    dialect: 'mssql',
+    
+    // Use this if you're on Windows Azure
+    dialectOptions: { 
+        encrypt: true 
     },
-    options: {
-        instanceName: 'MSSQLSERVER',        
-    }
+    
+    pool: {
+        max: 5,
+        min: 0,
+        idle: 10000
+    } 
 }
