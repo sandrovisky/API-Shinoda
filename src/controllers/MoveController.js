@@ -9,19 +9,10 @@ module.exports = {
         const result =  await Move.findAll({ include: 
             [
                 {
-                    association: 'moveitens',
-                    include: [
-                        {
-                            model: MoveItensVolume,
-                            as: 'moveitensvolume'
-                        }
-                    ],
-                },
-                {
-                    association: 'moveitensvolumetable'
-                },
-                {
                     association: 'supplier'
+                },
+                {
+                    association: 'moveitens'
                 }
             ],
                 
@@ -42,9 +33,6 @@ module.exports = {
                         }
                     ],
                 },
-                {
-                    association: 'moveitensvolumetable'
-                }
             ],
                 
         })

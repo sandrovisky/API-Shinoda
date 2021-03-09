@@ -2,25 +2,33 @@
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        return queryInterface.createTable('AnalysisData', {
+        return queryInterface.createTable('VolumeItensTables', {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },        
-            idAnalysis: {
+            idMove: {
                 type: Sequelize.INTEGER,
                 references: {
-                    model: 'analyses',
+                    model: 'moves',
+                    key: 'id'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'NO ACTION'
+            },        
+            idLoteitens: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'loteitens',
                     key: 'id'
                 },
                 onUpdate: 'CASCADE',
                 onDelete: 'NO ACTION'
             },
-            quantidadeIntegral: Sequelize.STRING,        
-            quantidadeGema: Sequelize.STRING,
-            quantidadeClara: Sequelize.STRING,
-            quantidadeCasca: Sequelize.STRING,   
+            lastId: Sequelize.INTEGER,
+            quantidadePaletes: Sequelize.INTEGER, 
+            quantidadeTotal: Sequelize.INTEGER,
             createdBy: Sequelize.INTEGER,
             updatedBy: Sequelize.INTEGER,
             createdAt: Sequelize.DATE,
@@ -29,7 +37,7 @@ module.exports = {
       },
     
       down: async (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('AnalysisData')
+        return queryInterface.dropTable('VolumeItensTables')
       }
 };
 

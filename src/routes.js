@@ -11,9 +11,9 @@ const MoveController = require('./controllers/MoveController')
 const MoveItensController = require('./controllers/MoveItensController')
 const LoteItensController = require('./controllers/LoteItensController')
 const MoveItensVolumeController = require('./controllers/MoveItensVolumeController')
-const MoveItensVolumeTableController = require('./controllers/MoveItensVolumeTableController')
 const AnalysisController = require('./controllers/AnalysisController')
 const AnalysisDataController = require('./controllers/AnalysisDataController')
+const VolumeItensTableController = require('./controllers/VolumeItensTableController')
 
 const routes = express.Router()
 
@@ -67,7 +67,7 @@ routes.get('/moves', MoveController.index)
 routes.get('/moves/:id', MoveController.indexOne)
 routes.post('/moves', MoveController.store)
 routes.delete('/moves/:id', MoveController.delete)
-routes.put('/moves/:id', MoveController.update)
+routes.put('/moves', MoveController.update)
 
 //rotas de move itens
 routes.get('/move-itens', MoveItensController.index)
@@ -75,38 +75,33 @@ routes.get('/move-itens/:idMove', MoveItensController.indexOne)
 routes.get('/move-itens/move/:id', MoveItensController.indexOneMove)
 routes.post('/move-itens', MoveItensController.store)
 routes.delete('/move-itens/:id', MoveItensController.delete)
-routes.put('/move-itens/:id', MoveItensController.update)
+routes.put('/move-itens', MoveItensController.update)
 
 //rotas de lotes
 routes.get('/lotes', LoteItensController.index)
-routes.get('/lotes/table/:codigo', LoteItensController.indexTables)
+routes.get('/lotes/:id', LoteItensController.indexLote)
+routes.get('/lotes/move/:idMove', LoteItensController.indexVolumeTable)
+routes.get('/lotes/lote/:idMove/:lote/:idProduct', LoteItensController.indexOne)
 routes.post('/lotes', LoteItensController.store)
 routes.delete('/lotes/:id', LoteItensController.delete)
-routes.put('/lotes/:id', LoteItensController.update)
+routes.put('/lotes', LoteItensController.update)
 
 //rotas de MoveItensVolume
 routes.get('/move-itens-volumes', MoveItensVolumeController.index)
 routes.get('/move-itens-volumes/:idMove', MoveItensVolumeController.indexAll)
-routes.get('/move-itens-volumess/:lastId/:quantidadePaletes', MoveItensVolumeController.indexMove)
-routes.get('/move-itens-volumes/entrada/:lastId/:quantidadePaletes/:codigo', MoveItensVolumeController.indexEntrada)
+routes.get('/move-itens-volumes/codigo/:codigo', MoveItensVolumeController.indexCodigo)
+routes.get('/move-itens-volumes/loteitens/:idLoteitens', MoveItensVolumeController.indexByLote)
 routes.post('/move-itens-volumes', MoveItensVolumeController.store)
-routes.delete('/move-itens-volumes/:id', MoveItensVolumeController.delete)
+routes.delete('/move-itens-volumes', MoveItensVolumeController.delete)
+routes.delete('/move-itens-volumes/pesos/:idLoteitens/:quantidadeTotal/:quantidadePaletes', MoveItensVolumeController.deletePesos)
 routes.put('/move-itens-volumes', MoveItensVolumeController.update)
-
-//rotas de MoveItensVolumeTable
-routes.get('/move-itens-volumes-tables', MoveItensVolumeTableController.index)
-routes.get('/move-itens-volumes-tables/table/:id', MoveItensVolumeTableController.indexTable)
-routes.get('/move-itens-volumes-tables/:idMove', MoveItensVolumeTableController.indexAll)
-routes.post('/move-itens-volumes-tables', MoveItensVolumeTableController.store)
-routes.delete('/move-itens-volumes-tables/:id', MoveItensVolumeTableController.delete)
-routes.put('/move-itens-volumes-tables/:id', MoveItensVolumeTableController.update)
 
 //rotas de analysis
 routes.get('/analyses', AnalysisController.index)
 routes.get('/analyses/:id', AnalysisController.indexOne)
 routes.post('/analyses', AnalysisController.store)
-routes.delete('/analyses/:id', AnalysisController.delete)
-routes.put('/analyses/:id', AnalysisController.update)
+routes.delete('/analyses', AnalysisController.delete)
+routes.put('/analyses', AnalysisController.update)
 
 //rotas de dados das analises
 routes.get('/analysis-data', AnalysisDataController.index)
@@ -114,5 +109,11 @@ routes.get('/analysis-data/:idAnalysis', AnalysisDataController.indexOne)
 routes.post('/analysis-data', AnalysisDataController.store)
 routes.delete('/analysis-data/:id', AnalysisDataController.delete)
 routes.put('/analysis-data/:id', AnalysisDataController.update)
+
+//rotas de volumeitenstable
+routes.get('/volume-itens-tables', VolumeItensTableController.index)
+routes.get('/volume-itens-tables/moves/:idMove', VolumeItensTableController.indexByMoves)
+routes.post('/volume-itens-tables', VolumeItensTableController.store)
+routes.delete('/volume-itens-tables/:id', VolumeItensTableController.delete)
 
 module.exports = routes;
