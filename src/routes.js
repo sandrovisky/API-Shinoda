@@ -37,6 +37,7 @@ routes.put('/products/:id', ProductController.update)
 
 //rotas de usuarios
 routes.get('/users', UserController.index)
+routes.get('/users/login/:usuario/:senha', UserController.indexLogin)
 routes.get('/users/:usuario', UserController.findUser)
 routes.post('/users', UserController.store)
 routes.put('/users/:id', UserController.update)
