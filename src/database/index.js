@@ -14,7 +14,11 @@ const MoveItensVolume = require('../model/MoveItensVolume')
 const Analysis = require('../model/Analysis')
 const AnalysisData = require('../model/AnalysisData')
 const VolumeItensTables = require('../model/VolumeItensTable')
-
+const Devolucao = require('../model/Devolucao')
+const DevolucaoItens = require('../model/DevolucaoItens')
+const Producao = require('../model/Producao')
+const ProducaoEquipment = require('../model/ProducaoEquipment')
+const ProducaoItens = require('../model/ProducaoItens')
 
 const connection = new Sequelize(dbConfig)
 
@@ -31,6 +35,11 @@ LoteItens.init(connection)
 MoveItensVolume.init(connection)
 Analysis.init(connection)
 AnalysisData.init(connection)
+Devolucao.init(connection)
+DevolucaoItens.init(connection)
+Producao.init(connection)
+ProducaoEquipment.init(connection)
+ProducaoItens.init(connection)
 
 VolumeItensTables.associate(connection.models)
 SupplierProduct.associate(connection.models)
@@ -40,5 +49,11 @@ MoveItens.associate(connection.models)
 MoveItensVolume.associate(connection.models)
 Analysis.associate(connection.models)
 AnalysisData.associate(connection.models)
+Devolucao.associate(connection.models)
+DevolucaoItens.associate(connection.models)
+Producao.associate(connection.models)
+ProducaoEquipment.associate(connection.models)
+ProducaoItens.associate(connection.models)
+
 
 module.exports = connection

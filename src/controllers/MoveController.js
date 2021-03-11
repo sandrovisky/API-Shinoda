@@ -11,9 +11,6 @@ module.exports = {
                 {
                     association: 'supplier'
                 },
-                {
-                    association: 'moveitens'
-                }
             ],
                 
         })

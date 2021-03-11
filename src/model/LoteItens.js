@@ -12,6 +12,7 @@ class LoteItens extends Model {
             sequelize
         })
     }
+    
     static associate(models) {
         this.belongsTo(models.MoveItens, { foreignKey: 'idMoveitens', as: 'moveitens' })
         this.hasOne(models.Analysis, { foreignKey: 'idLoteitens', as: 'analysis' })
