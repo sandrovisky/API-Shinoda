@@ -19,11 +19,13 @@ const DevolucaoItens = require('../model/DevolucaoItens')
 const Producao = require('../model/Producao')
 const ProducaoEquipment = require('../model/ProducaoEquipment')
 const ProducaoItens = require('../model/ProducaoItens')
+const Config = require('../model/Config')
 
 const connection = new Sequelize(dbConfig)
 
 
 Supplier.init(connection)
+Config.init(connection)
 VolumeItensTables.init(connection)
 Product.init(connection)
 User.init(connection)

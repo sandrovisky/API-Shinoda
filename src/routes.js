@@ -14,6 +14,8 @@ const VolumeItensTableRoutes = require('./routes/VolumeItensTableRoutes')
 const AnalysisRoutes = require('./routes/AnalysisRoutes')
 const AnalysisDataRoutes = require('./routes/AnalysisDataRoutes')
 const ProducaoRoutes = require('./routes/ProducaoRoutes')
+const ProducaoItensRoutes = require('./routes/ProducaoItensRoutes')
+const ConfigRoutes = require('./routes/ConfigRoutes')
 
 routes.use('/users', UserRoutes)
 routes.use('/suppliers', SupplierRoutes)
@@ -28,5 +30,7 @@ routes.use('/volume-itens-tables', VolumeItensTableRoutes)
 routes.use('/analyses', AnalysisRoutes)
 routes.use('/analysis-data', AnalysisDataRoutes)
 routes.use('/producoes', ProducaoRoutes)
+routes.use('/producao-itens', ProducaoItensRoutes)
+routes.use('/config', ConfigRoutes)
 
 module.exports = routes;
