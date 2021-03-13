@@ -3,8 +3,9 @@ const ProducaoItens = require('../model/ProducaoItens')
 const Config = require('../model/Config')
 const MoveItensVolume = require('../model/MoveItensVolume')
 
-module.exports = {
+const Sequelize = require('sequelize')
 
+module.exports = {
     
     async index(req, res){
         const result =  await Producao.findAll({
@@ -17,9 +18,69 @@ module.exports = {
         return res.json(result)
     },
 
+    async indexOne(req, res){
+        const { id } = req.params
+        const result =  await Producao.findOne({
+            where: {
+                id
+            }
+        })
+        return res.json(result)
+    },
     
     async update(req, res){
+        const { 
+            id, 
+            status, 
+            quantidadeIntegral, 
+            quantidadeGema, 
+            quantidadeClara,
+            updatedBy,
+            endedBy
+        } = req.body
 
+        let endedAt = Sequelize.literal('CURRENT_TIMESTAMP')
+
+        if (endedBy) {
+            await Producao.update({ 
+                status, 
+                quantidadeIntegral, 
+                quantidadeGema, 
+                quantidadeClara,
+                updatedBy,
+                endedBy,
+                endedAt
+            }, 
+            { 
+                where: { 
+                    id 
+                } 
+            })
+            .then(async () => {
+                res.status(200).json({message: "Atualizado com sucesso"})
+            })
+            .catch(async () => {
+                res.status(400).json({error: "Falha ao atualizar"})
+            })
+        } else {
+            await Producao.update({ 
+                status, 
+                updatedBy,
+            }, 
+            { 
+                where: { 
+                    id 
+                } 
+            })
+            .then(async () => {
+                res.status(200).json({message: "Atualizado com sucesso"})
+            })
+            .catch(async () => {
+                res.status(400).json({error: "Falha ao atualizar"})
+            })  
+        }   
+
+        
     },
 
     async delete(req, res){
@@ -36,7 +97,7 @@ module.exports = {
 
     async store(req, res){
 
-        const { codigo } = req.body
+        const { codigo, createdBy } = req.body
 
         const numProducao = await Config.findOne()
         .then(async res => {
@@ -57,7 +118,7 @@ module.exports = {
             })
 
             if ( !encontraMoveitens ) {
-                await Producao.create({ status: 1, numProducao })
+                await Producao.create({ status: 1, numProducao, createdBy })
                 .then(async response => {
                     res.status(200).json(response); 
                     await Config.update(

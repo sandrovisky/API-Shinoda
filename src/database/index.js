@@ -17,7 +17,7 @@ const VolumeItensTables = require('../model/VolumeItensTable')
 const Devolucao = require('../model/Devolucao')
 const DevolucaoItens = require('../model/DevolucaoItens')
 const Producao = require('../model/Producao')
-const ProducaoEquipment = require('../model/ProducaoEquipment')
+const ProducaoEquipment = require('../model/ProducaoEquipamento')
 const ProducaoItens = require('../model/ProducaoItens')
 const Config = require('../model/Config')
 

@@ -8,10 +8,10 @@ class Producao extends Model {
             quantidadeIntegral: DataTypes.FLOAT, 
             quantidadeGema: DataTypes.FLOAT,
             quantidadeClara: DataTypes.FLOAT,
-            quantidadeCasca: DataTypes.FLOAT,
             endedBy: DataTypes.INTEGER,
             endedAt: DataTypes.DATE,
             createdBy: DataTypes.INTEGER,
+            updatedBy: DataTypes.INTEGER,
         }, {
             sequelize,
             tableName: "Producoes"

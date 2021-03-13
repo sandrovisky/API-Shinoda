@@ -15,6 +15,7 @@ const AnalysisRoutes = require('./routes/AnalysisRoutes')
 const AnalysisDataRoutes = require('./routes/AnalysisDataRoutes')
 const ProducaoRoutes = require('./routes/ProducaoRoutes')
 const ProducaoItensRoutes = require('./routes/ProducaoItensRoutes')
+const ProducaoEquipamentoRoutes = require('./routes/ProducaoEquipamentoRoutes')
 const ConfigRoutes = require('./routes/ConfigRoutes')
 
 routes.use('/users', UserRoutes)
@@ -31,6 +32,7 @@ routes.use('/analyses', AnalysisRoutes)
 routes.use('/analysis-data', AnalysisDataRoutes)
 routes.use('/producoes', ProducaoRoutes)
 routes.use('/producao-itens', ProducaoItensRoutes)
+routes.use('/producao-equipamentos', ProducaoEquipamentoRoutes)
 routes.use('/config', ConfigRoutes)
 
 module.exports = routes;
