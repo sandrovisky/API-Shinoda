@@ -20,6 +20,14 @@ module.exports = {
                     include: [
                         {
                             association: 'lote'
+                        },
+                        {
+                            association: 'moveitens',
+                            include: [
+                                {
+                                    association: 'product'
+                                }
+                            ]
                         }
                     ]
                 }
