@@ -4,6 +4,7 @@ class Devolucao extends Model {
     static init (sequelize) {
         super.init({
             status: DataTypes.INTEGER,
+            pesoTotal: DataTypes.FLOAT,
             createdBy: DataTypes.INTEGER,
             updatedBy: DataTypes.INTEGER,
         }, {

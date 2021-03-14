@@ -85,13 +85,8 @@ module.exports = {
 
     async delete(req, res){
         const { id } = req.body
-
-        return res.json(
-            await Producao.destroy({ where: { id } })
-            .then(async () => {
-                res.status(200).json({message: "Deletado com sucesso"})
-            })
-        )
+        const result =  await Producao.destroy({ where: { id } })
+        return res.json(result)
 
     },
 

@@ -61,9 +61,7 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
 
-        const { createdBy, updatedBy, idAnalysis, idMoveitensvolume, idProduct, quantidadeIntegral, quantidadeGema, quantidadeClara, quantidadeCasca } = req.body
-
-        const result = await AnalysisData.create({ createdBy, updatedBy, idAnalysis, idMoveitensvolume, idProduct, quantidadeIntegral, quantidadeGema, quantidadeClara, quantidadeCasca })
+        const result = await AnalysisData.create(req.body)
         
         return res.json(result)
     }

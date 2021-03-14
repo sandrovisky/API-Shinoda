@@ -17,6 +17,7 @@ module.exports = {
                 onUpdate: 'CASCADE',
                 onDelete: 'NO ACTION'
             },
+            pesoTotal: Sequelize.FLOAT(18,3),  
             status: Sequelize.INTEGER,       
             createdBy: Sequelize.INTEGER,
             updatedBy: Sequelize.INTEGER,

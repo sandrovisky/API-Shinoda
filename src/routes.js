@@ -17,6 +17,7 @@ const ProducaoRoutes = require('./routes/ProducaoRoutes')
 const ProducaoItensRoutes = require('./routes/ProducaoItensRoutes')
 const ProducaoEquipamentoRoutes = require('./routes/ProducaoEquipamentoRoutes')
 const ConfigRoutes = require('./routes/ConfigRoutes')
+const DevolucaoRoutes = require('./routes/DevolucaoRoutes')
 
 routes.use('/users', UserRoutes)
 routes.use('/suppliers', SupplierRoutes)
@@ -34,5 +35,6 @@ routes.use('/producoes', ProducaoRoutes)
 routes.use('/producao-itens', ProducaoItensRoutes)
 routes.use('/producao-equipamentos', ProducaoEquipamentoRoutes)
 routes.use('/config', ConfigRoutes)
+routes.use('/devolucoes', DevolucaoRoutes)
 
 module.exports = routes;
