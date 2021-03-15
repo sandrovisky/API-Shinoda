@@ -1,8 +1,9 @@
+require('dotenv').config()
 module.exports = {
-    database: 'shinoda1', 
-    username: 'sandrovisky', 
-    password: 'shinoda!123', 
-    host: 'sandrovisky.database.windows.net',
+    database: process.env.DATABASE_DATABASE, 
+    username: process.env.DATABASE_USER, 
+    password: process.env.DATABASE_PASSWORD, 
+    host: process.env.DATABASE_HOST,
     dialect: 'mssql',
     
     // Use this if you're on Windows Azure
