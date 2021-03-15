@@ -20,7 +20,7 @@ module.exports = {
             idMoveitensvolume: {
                 type: Sequelize.INTEGER,
                 references: {
-                    model: 'moveitensvolumes',
+                    model: 'MoveItensVolumes',
                     key: 'id'
                 },
                 onUpdate: 'CASCADE',

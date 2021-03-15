@@ -11,21 +11,23 @@ module.exports = {
             },        
             idProduct: {
                 type: Sequelize.INTEGER,
+                allowNull: false,
                 references: {
-                    model: 'products',
+                    model: 'Products',
                     key: 'id'
                 },
                 onUpdate: 'CASCADE',
-                onDelete: 'NO ACTION'
+                onDelete: 'RESTRICT'
             },
             idSupplier: {
                 type: Sequelize.INTEGER,
+                allowNull: false,
                 references: {
-                    model: 'suppliers',
+                    model: 'Suppliers',
                     key: 'id'
                 },
                 onUpdate: 'CASCADE',
-                onDelete: 'NO ACTION'
+                onDelete: 'RESTRICT'
             },
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE
