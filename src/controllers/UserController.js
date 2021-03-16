@@ -1,4 +1,5 @@
 const User = require('../model/User')
+var bcrypt = require('bcryptjs');
 
 module.exports = {
 
@@ -10,14 +11,18 @@ module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
     async indexLogin(req, res){
-        const { usuario, senha } = req.params
+        const { usuario, senhaHash } = req.params
         const result =  await User.findOne({
             where: {
-                usuario,
-                senha
+                usuario
             }
         })
-        return res.json(result)
+        if (await bcrypt.compare(senhaHash, result.senha)) {
+            result.senha = undefined
+            return res.json(result)
+        } else {
+            return res.status(400).json({error: "Usuario ou senha invalidos"})
+        }
     },
 
     //Função que vai receber uma string de 'usuario' e retornar um objeto, caso ja exista o usuario, ou null
@@ -36,6 +41,7 @@ module.exports = {
         const { id } = req.params
         const { senha } = req.body        
 
+
         await User.update({ senha },{where: {id}})
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
@@ -47,9 +53,21 @@ module.exports = {
         });
     },
 
+    async delete(req, res){
+
+        await User.destroy({ where: req.params })
+        .then(async response => {
+            return res.json({ message: "deletado com sucesso"})
+        })
+    },
+
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { usuario, senha } = req.body
+        const { usuario, senhaSemHash } = req.body
+
+        var salt = bcrypt.genSaltSync(10);
+        var senha = bcrypt.hashSync(senhaSemHash, salt)
+        console.log(senha)
 
         //constante que sera utilizada para verificar se ja existe um mesmo usuario cadastrado
         const verificaCadastro =  await User.findOne({ where: { usuario } });
