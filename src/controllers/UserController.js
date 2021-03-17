@@ -1,5 +1,6 @@
 const User = require('../model/User')
-var bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
 
 module.exports = {
 
@@ -10,19 +11,35 @@ module.exports = {
     },
 
     //Função que vai retornar objeto com todos os cadastros
-    async indexLogin(req, res){
-        const { usuario, senhaHash } = req.params
+    async loginPost(req, res){
+        const { usuario, senhaHash } = req.body
+
         const result =  await User.findOne({
             where: {
                 usuario
             }
         })
-        if (await bcrypt.compare(senhaHash, result.senha)) {
-            result.senha = undefined
-            return res.json(result)
-        } else {
-            return res.status(400).json({error: "Usuario ou senha invalidos"})
-        }
+
+        if (!result) 
+            return res.status(400).json({error: "Usuario nao encontrado"})
+    
+        if (!await bcrypt.compare(senhaHash, result.senha))
+            return res.status(400).json({error: "Senha Invalida"})
+
+        result.senha = undefined
+
+        const token = jwt.sign({ id: result.id}, process.env.HASH_JWT, {
+            expiresIn: 1000 * 60 * 60 * 8 //8hrs
+        })
+        return res.json({ result , token })        
+    },
+
+    async loginGet(req, res){
+        const id = req.idUsuario
+        console.log(id)
+
+        const result =  await User.findByPk(id)
+        return res.json(result)      
     },
 
     //Função que vai receber uma string de 'usuario' e retornar um objeto, caso ja exista o usuario, ou null

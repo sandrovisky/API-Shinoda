@@ -4,8 +4,8 @@ module.exports = {
 
     //Função que vai retornar objeto com todos os cadastros
     async index(req, res){
-        const result =  await Product.findAll()        
-        return res.json(result)
+        const result =  await Product.findAll()   
+        return res.json(result)             
     },
 
     async indexOne(req, res){

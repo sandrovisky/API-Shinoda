@@ -6,13 +6,13 @@ require('./database/index')
 
 const app = express()
 
-
+app.use(cors())
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Headers", "*")
-    res.header("Access-Control-Allow-Methods", "*")
-    
-    app.use(cors())
+    res.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
+    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, PUT, OPTIONS")
+    res.header('Access-Control-Allow-Credentials', 'true')
+
     next()
 })
 
