@@ -7,6 +7,8 @@ class Equipment extends Model {
             tipo: DataTypes.STRING,
             tag: DataTypes.STRING,
             capacidade: DataTypes.STRING,
+            createdBy: DataTypes.INTEGER,
+            updatedBy: DataTypes.INTEGER,
         }, {
             sequelize
         })

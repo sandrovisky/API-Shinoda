@@ -97,8 +97,8 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
 
-        console.log(req.body)
-
+        req.body.createdBy = req.idUsuario
+        
         const result = await VolumeItensTable.create(req.body)
         
         return res.json(result)

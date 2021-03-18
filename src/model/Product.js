@@ -6,6 +6,8 @@ class Product extends Model {
             codigo: DataTypes.STRING,
             nome: DataTypes.STRING,
             medida: DataTypes.STRING,
+            createdBy: DataTypes.INTEGER,
+            updatedBy: DataTypes.INTEGER,
         }, {
             sequelize
         })

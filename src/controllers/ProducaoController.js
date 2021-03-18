@@ -35,52 +35,31 @@ module.exports = {
             quantidadeIntegral, 
             quantidadeGema, 
             quantidadeClara,
-            updatedBy,
-            endedBy
         } = req.body
+        const updatedBy = req.idUsuario
+        const endedBy = req.idUsuario
 
-        let endedAt = Sequelize.literal('CURRENT_TIMESTAMP')
+        //let endedAt = Sequelize.literal('CURRENT_TIMESTAMP')
 
-        if (endedBy) {
-            await Producao.update({ 
-                status, 
-                quantidadeIntegral, 
-                quantidadeGema, 
-                quantidadeClara,
-                updatedBy,
-                endedBy,
-                endedAt
-            }, 
-            { 
-                where: { 
-                    id 
-                } 
-            })
-            .then(async () => {
-                res.status(200).json({message: "Atualizado com sucesso"})
-            })
-            .catch(async () => {
-                res.status(400).json({error: "Falha ao atualizar"})
-            })
-        } else {
-            await Producao.update({ 
-                status, 
-                updatedBy,
-            }, 
-            { 
-                where: { 
-                    id 
-                } 
-            })
-            .then(async () => {
-                res.status(200).json({message: "Atualizado com sucesso"})
-            })
-            .catch(async () => {
-                res.status(400).json({error: "Falha ao atualizar"})
-            })  
-        }   
 
-        
+        await Producao.update({ 
+            status, 
+            quantidadeIntegral, 
+            quantidadeGema, 
+            quantidadeClara,
+            updatedBy, endedBy
+        }, 
+        { 
+            where: { 
+                id 
+            } 
+        })
+        .then(async () => {
+            res.status(200).json({message: "Atualizado com sucesso"})
+        })
+        .catch(async () => {
+            res.status(400).json({error: "Falha ao atualizar"})
+        })        
     },
 
     async delete(req, res){
@@ -92,11 +71,12 @@ module.exports = {
 
     async store(req, res){
 
-        const { codigo, createdBy } = req.body
+        const { codigo } = req.body
+        const createdBy = req.idUsuario
 
         const numProducao = await Config.findOne()
-        .then(async res => {
-            return (res.numProducao)
+        .then(async response => {
+            return (response.numProducao)
         })
 
         const encontraCodigo = await MoveItensVolume.findOne({ 

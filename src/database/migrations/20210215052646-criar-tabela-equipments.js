@@ -13,6 +13,8 @@ module.exports = {
             tipo: Sequelize.STRING,
             tag: Sequelize.STRING,
             capacidade: Sequelize.STRING,
+            createdBy: Sequelize.INTEGER,
+            updatedBy: Sequelize.INTEGER,
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE
         })

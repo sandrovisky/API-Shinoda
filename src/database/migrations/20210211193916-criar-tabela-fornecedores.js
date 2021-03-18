@@ -13,6 +13,8 @@ module.exports = {
             razaoSocial: Sequelize.STRING,
             endereco: Sequelize.STRING,
             cnpj: Sequelize.STRING,
+            createdBy: Sequelize.INTEGER,
+            updatedBy: Sequelize.INTEGER,
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE
         })

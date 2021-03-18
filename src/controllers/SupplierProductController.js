@@ -42,6 +42,7 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
         const { idSupplier, idProduct } = req.body
+        const createdBy = req.idUsuario
 
         //constante que verificara se id do fornecedor existe na tabela Suppliers
         const verificaFornecedor =  await Supplier.findOne({ where: {id: idSupplier} })
@@ -57,7 +58,7 @@ module.exports = {
         //constante que verificara se ja existe um regristros com as chaves
         const encontraRegistro =  await SupplierProduct.findOne({ where: { idSupplier, idProduct } });
         if (encontraRegistro === null) {
-            const result =  await SupplierProduct.create({ idSupplier, idProduct })
+            const result =  await SupplierProduct.create({ idSupplier, idProduct, createdBy })
             return res.json(result)
         } else {
             return res.status(400).json({message: "registro ja cadastrado"});

@@ -48,17 +48,7 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
-        const { createdBy, updatedBy, id } = req.body        
-
-        await MoveItens.update( { createdBy, updatedBy } ,{ where: { id }, force: true }) 
-        .then(() => {
-            res.status(200).json({message: "Cadastro atualizado com sucesso"});
-            console.log({message: "Cadastro atualizado com sucesso"})
-        })
-        .catch(() => {
-            res.status(400).json({message: "Erro ao atualizar cadastro"});
-            console.log({message: "Erro ao atualizar cadastro"});
-        });
+        
     },
 
     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
@@ -77,9 +67,10 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { createdBy, updatedBy, idMove, idProduct, idLoteitens } = req.body 
+        const { idMove, idProduct, idLoteitens } = req.body 
+        const createdBy = req.idUsuario
 
-        const result = await MoveItens.create({ createdBy, updatedBy, idMove, idProduct, idLoteitens })
+        const result = await MoveItens.create({ createdBy, idMove, idProduct, idLoteitens })
         
         return res.json(result)
     }

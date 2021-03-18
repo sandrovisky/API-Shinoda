@@ -13,6 +13,8 @@ module.exports = {
                 unique: true,
             },
             senha: Sequelize.STRING,
+            createdBy: Sequelize.INTEGER,
+            updatedBy: Sequelize.INTEGER,
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE
         })

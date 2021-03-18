@@ -36,7 +36,6 @@ module.exports = {
 
     async loginGet(req, res){
         const id = req.idUsuario
-        console.log(id)
 
         const result =  await User.findByPk(id)
         return res.json(result)      
@@ -56,10 +55,11 @@ module.exports = {
     async update(req, res){
 
         const { id } = req.params
-        const { senha } = req.body        
+        const { senha } = req.body    
+        const updatedBy = req.idUsuario    
 
 
-        await User.update({ senha },{where: {id}})
+        await User.update({ senha, updatedBy },{where: {id}})
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})

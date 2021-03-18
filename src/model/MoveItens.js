@@ -2,7 +2,9 @@ const { Model, DataTypes } = require('sequelize')
 
 class MoveItens extends Model {
     static init (sequelize) {
-        super.init({
+        super.init({            
+            createdBy: DataTypes.INTEGER,
+            updatedBy: DataTypes.INTEGER,
         }, {
             sequelize
         })

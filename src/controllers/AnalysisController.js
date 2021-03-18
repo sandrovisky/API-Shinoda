@@ -35,9 +35,10 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
-        const { status, id } = req.body        
+        const { status, id } = req.body   
+        const updatedBy = req.idUsuario     
 
-        await Analysis.update({ status }, { where: { id }, force: true}) 
+        await Analysis.update({ status, updatedBy }, { where: { id }, force: true}) 
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})
@@ -64,8 +65,10 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
+        const  { idProduct, idLoteitens, status } = req.body
+        const createdBy = req.idUsuario
 
-        const result = await Analysis.create(req.body)
+        const result = await Analysis.create({ idProduct, idLoteitens, status, createdBy })
         
         return res.json(result)
     }

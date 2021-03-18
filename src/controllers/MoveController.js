@@ -58,9 +58,10 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
-        const { nf, pedido, status, createdBy, updatedBy, id } = req.body        
+        const { nf, pedido, status, id } = req.body   
+        const updatedBy = req.idUsuario     
 
-        await Move.update( { nf, pedido, status, createdBy, updatedBy } ,{ where: { id }, force: true }) 
+        await Move.update( { nf, pedido, status, updatedBy } ,{ where: { id }, force: true }) 
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})
@@ -87,16 +88,17 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { nf, pedido, status, createdBy, updatedBy, idSupplier } = req.body 
+        const { nf, pedido, status, idSupplier } = req.body 
+        const createdBy = req.idUsuario
 
         const supplier =  await Supplier.findByPk(idSupplier)
 
         if(supplier !== null){
-            const result = await Move.create({ nf, pedido, status, createdBy, updatedBy, idSupplier })
+            const result = await Move.create({ nf, pedido, status, createdBy, idSupplier })
         
             return res.json(result)
         } else {
-            return  res.status(500).json("erro")
+            return  res.status(400).json("Usuario ja cadastrado")
         }
         
         

@@ -57,7 +57,8 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo cadastro
     async store(req, res){
-        const { idProducao, codigo, createdBy } = req.body
+        const { idProducao, codigo } = req.body
+        const createdBy = req.idUsuario
 
         const encontraCodigo = await MoveItensVolume.findOne({ 
             where: {

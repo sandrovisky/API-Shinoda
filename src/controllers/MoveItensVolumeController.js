@@ -105,20 +105,6 @@ module.exports = {
         })
     },
 
-     //Função que vai receber 'id' de um cadastro e exclusão do mesmo
-     async deletePesos(req, res){
-        const { idLoteitens, quantidadeTotal, quantidadePaletes } = req.params
-        await MoveItensVolume.destroy({ where: { idLoteitens, quantidadePaletes, quantidadeTotal }, force: true})
-        .then(() => {            
-            console.log({message: "Cadastro deletado com sucesso"})
-            return res.status(200).json({message: "Cadastro deletado com sucesso"});
-        })
-        .catch(() => {            
-            console.log({message: "Erro ao deletar cadastro"});
-            return res.status(400).json({message: "Erro ao deletar cadastro"});
-        })
-    },
-
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
 
@@ -138,9 +124,10 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
 
-        const { idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy } = req.body
+        const { idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal } = req.body
+        const createdBy = req.idUsuario
 
-        let resultall = []
+        let resultAll = []
 
         for ( let i = 0; i < quantidadePaletes; i++) {
             const result = await MoveItensVolume.create({ idMoveitens, idLoteitens, quantidadePaletes, quantidadeTotal, createdBy })
@@ -148,10 +135,10 @@ module.exports = {
             result.codigo = "ENT" + result.id 
             
             await result.save()
-            resultall.push(result)
+            resultAll.push(result)
         }        
         
-        return res.json(resultall)        
+        return res.json(resultAll)        
     }
 }
 

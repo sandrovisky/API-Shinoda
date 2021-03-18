@@ -231,9 +231,10 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
 
-        const { codigo, numLaudo, dataValidade, createdBy, updatedBy, idMoveitens, id, coletado } = req.body        
+        const { codigo, numLaudo, dataValidade, idMoveitens, id, coletado } = req.body    
+        const updatedBy = req.idUsuario    
 
-        await LoteItens.update({ codigo, numLaudo, dataValidade, createdBy, updatedBy, idMoveitens, coletado }, { where: { id } })
+        await LoteItens.update({ codigo, numLaudo, dataValidade, updatedBy, idMoveitens, coletado }, { where: { id } })
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})
@@ -246,7 +247,8 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { laudo, lote, dataValidade, createdBy, idMoveitens } = req.body
+        const { laudo, lote, dataValidade, idMoveitens } = req.body
+        const createdBy = req.idUsuario
     
         const result = await LoteItens.create({ laudo, lote, dataValidade, createdBy, idMoveitens })
         

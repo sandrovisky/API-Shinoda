@@ -18,9 +18,10 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para atualizar o cadastro
     async update(req, res){
-        const {id, nomeFantasia, razaoSocial, endereco, cnpj} = req.body        
+        const {id, nomeFantasia, razaoSocial, endereco, cnpj} = req.body    
+        const updatedBy = req.idUsuario    
 
-        await Supplier.update({ nomeFantasia, razaoSocial, endereco, cnpj },{where: {id}, force: true}) 
+        await Supplier.update({ nomeFantasia, razaoSocial, endereco, cnpj, updatedBy },{where: {id}, force: true}) 
         .then(() => {
             res.status(200).json({message: "Cadastro atualizado com sucesso"});
             console.log({message: "Cadastro atualizado com sucesso"})
@@ -48,8 +49,10 @@ module.exports = {
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
         const { nomeFantasia, razaoSocial, endereco, cnpj } = req.body
+        const createdBy = req.idUsuario
+        console.log(req.idUsuario)
 
-        const result = await Supplier.create({  nomeFantasia, razaoSocial, endereco, cnpj })
+        const result = await Supplier.create({  nomeFantasia, razaoSocial, endereco, cnpj, createdBy })
         return res.json(result)
 
     },

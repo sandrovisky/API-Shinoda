@@ -11,6 +11,8 @@ module.exports = {
         codigo: Sequelize.STRING,
         nome: Sequelize.STRING,
         medida: Sequelize.STRING,
+        createdBy: Sequelize.INTEGER,
+        updatedBy: Sequelize.INTEGER,
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE
     })

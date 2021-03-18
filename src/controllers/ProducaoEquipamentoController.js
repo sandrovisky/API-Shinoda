@@ -54,7 +54,8 @@ module.exports = {
 
     //Função que vai receber dados que serao utilizados para criação de um novo adastro
     async store(req, res){
-        const { idProducao, idEquipamento, createdBy } = req.body
+        const { idProducao, idEquipamento } = req.body
+        const createdBy = req.idUsuario
 
         const equipamentoProducao = await ProducaoEquipamento.findOne({
             where: {
