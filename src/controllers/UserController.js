@@ -29,7 +29,7 @@ module.exports = {
         result.senha = undefined
 
         const token = jwt.sign({ id: result.id}, process.env.HASH_JWT, {
-            expiresIn: 1000 * 60 * 60 * 8 //8hrs
+            expiresIn: "8h" //8hrs
         })
         return res.json({ result , token })        
     },
