@@ -4132,10 +4132,10 @@ tarn@^1.1.5:
   resolved "https://registry.yarnpkg.com/tarn/-/tarn-1.1.5.tgz#7be88622e951738b9fa3fb77477309242cdddc2d"
   integrity sha512-PMtJ3HCLAZeedWjJPgGnCvcphbCOMbtZpjKgLq3qM5Qq9aQud+XHrL0WlrlgnTyS8U+jrjGbEXprFcQrxPy52g==
 
-tedious@^11.0.5:
-  version "11.0.5"
-  resolved "https://registry.yarnpkg.com/tedious/-/tedious-11.0.5.tgz#a9efeb7ce769bcfc3e449320592cb6d1367b1b55"
-  integrity sha512-UNzGctisJn1ZCZVPoYRSXWmlU9tgSgWAgR9MW33pMP15JqYuDXeTUqcQptDrsOt9ztak2BibYY8Bb0kgcEMITA==
+tedious@^11.0.6:
+  version "11.0.6"
+  resolved "https://registry.yarnpkg.com/tedious/-/tedious-11.0.6.tgz#3c54b4b25621e1ae42b20bce177769bcf4a3e2e5"
+  integrity sha512-TD16XMTY616C9LEJI+oj3zlZ5uCSjY8sP0jlhLrMocRmgYfpdJlGPTkekXV2CfmFUtBdeWSPF1YPgRq8t2MatQ==
   dependencies:
     "@azure/ms-rest-nodeauth" "^3.0.6"
     "@js-joda/core" "^3.2.0"

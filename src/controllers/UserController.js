@@ -84,7 +84,6 @@ module.exports = {
 
         var salt = bcrypt.genSaltSync(10);
         var senha = bcrypt.hashSync(senhaSemHash, salt)
-        console.log(senha)
 
         //constante que sera utilizada para verificar se ja existe um mesmo usuario cadastrado
         const verificaCadastro =  await User.findOne({ where: { usuario } });
